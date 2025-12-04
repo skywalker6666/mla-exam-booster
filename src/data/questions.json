@@ -1,0 +1,4875 @@
+[
+  {
+    "id": "q1",
+    "text": "You are designing a machine learning solution that requires high-throughput, low-latency access to data stored in Amazon S3. The training instances are Amazon EC2 instances. Which storage solution should you use to provide the best performance for the training job?",
+    "options": [
+      "Amazon EBS General Purpose SSD (gp3)",
+      "Amazon FSx for Lustre",
+      "Amazon EFS",
+      "Amazon S3 Standard"
+    ],
+    "correctIndex": 1,
+    "explanation": "Amazon FSx for Lustre is a high-performance file system optimized for fast processing of workloads such as machine learning and high performance computing (HPC). It is deeply integrated with Amazon S3.",
+    "topics": [
+      "STORAGE"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q2",
+    "text": "A company needs to transfer 500 TB of image data from an on-premises location to Amazon S3. The network connection is 1 Gbps and is shared with other business critical traffic. Which data transfer service is the MOST efficient and cost-effective?",
+    "options": [
+      "AWS Snowball Edge Storage Optimized",
+      "AWS DataSync",
+      "Amazon S3 Transfer Acceleration",
+      "AWS Direct Connect"
+    ],
+    "correctIndex": 0,
+    "explanation": "For 500 TB of data with limited bandwidth (1 Gbps shared), AWS Snowball Edge is the most efficient and cost-effective offline transfer method. Transferring 500 TB over 1 Gbps would take months.",
+    "topics": [
+      "DATA_TRANSFER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q3",
+    "text": "You are evaluating a binary classification model for fraud detection. Fraud cases (positive class) are rare. You want to minimize the number of legitimate transactions flagged as fraud. Which metric should you prioritize?",
+    "options": [
+      "Recall",
+      "Precision",
+      "Accuracy",
+      "F1 Score"
+    ],
+    "correctIndex": 1,
+    "explanation": "Precision measures the proportion of positive identifications that was actually correct. High precision means fewer False Positives (legitimate transactions flagged as fraud).",
+    "topics": [
+      "EVAL"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q4",
+    "text": "Which XGBoost hyperparameter should be tuned to prevent overfitting by controlling the maximum depth of a tree?",
+    "options": [
+      "subsample",
+      "eta",
+      "max_depth",
+      "min_child_weight"
+    ],
+    "correctIndex": 2,
+    "explanation": "max_depth controls the maximum depth of a tree. Increasing this value will make the model more complex and more likely to overfit.",
+    "topics": [
+      "XGBOOST"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q5",
+    "text": "You have trained a model using Amazon SageMaker. You want to deploy the model to an endpoint and test a new model version with a small percentage of traffic before fully promoting it. Which deployment strategy should you use?",
+    "options": [
+      "A/B Testing with Production Variants",
+      "Multi-Model Endpoints",
+      "SageMaker Batch Transform",
+      "SageMaker Neo"
+    ],
+    "correctIndex": 0,
+    "explanation": "Production Variants allow you to test multiple models on the same endpoint by routing a specified percentage of traffic to each variant.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q6",
+    "text": "Which Amazon S3 storage class is most appropriate for storing training data that is accessed frequently during the training phase but rarely accessed afterwards?",
+    "options": [
+      "S3 Standard",
+      "S3 Intelligent-Tiering",
+      "S3 Standard-IA",
+      "S3 Glacier Deep Archive"
+    ],
+    "correctIndex": 1,
+    "explanation": "S3 Intelligent-Tiering automatically moves data between frequent and infrequent access tiers when access patterns change, which is ideal for data that is hot during training and cold afterwards.",
+    "topics": [
+      "STORAGE"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q7",
+    "text": "You are using Amazon SageMaker to train a model. You want to ensure that the training data is encrypted at rest. What should you do?",
+    "options": [
+      "Enable SSL/TLS for the training job",
+      "Use an Amazon EBS volume encrypted with a KMS key for the training instance",
+      "Encrypt the data in S3 using SSE-S3 or SSE-KMS",
+      "Use a VPC endpoint for S3"
+    ],
+    "correctIndex": 1,
+    "explanation": "SageMaker training instances use EBS volumes for temporary storage. You can encrypt these volumes using a KMS key to ensure data is encrypted at rest on the instance.",
+    "topics": [
+      "SECURITY_COST",
+      "SAGEMAKER"
+    ],
+    "difficulty": "HARD"
+  },
+  {
+    "id": "q8",
+    "text": "Which metric is calculated as 2 * (Precision * Recall) / (Precision + Recall)?",
+    "options": [
+      "Accuracy",
+      "AUC-ROC",
+      "F1 Score",
+      "Specificity"
+    ],
+    "correctIndex": 2,
+    "explanation": "The F1 Score is the harmonic mean of Precision and Recall.",
+    "topics": [
+      "EVAL"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q9",
+    "text": "In XGBoost, what is the effect of decreasing the 'eta' (learning rate) parameter?",
+    "options": [
+      "It speeds up training",
+      "It makes the model more robust to overfitting but requires more boosting rounds",
+      "It increases the depth of the trees",
+      "It increases the variance of the model"
+    ],
+    "correctIndex": 1,
+    "explanation": "Decreasing eta (learning rate) makes the model more robust by shrinking the weights on each step, but it generally requires more boosting rounds (n_estimators) to reach the same accuracy.",
+    "topics": [
+      "XGBOOST"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q10",
+    "text": "You need to automate the retraining of a SageMaker model whenever new data arrives in S3. Which service combination is best suited for this orchestration?",
+    "options": [
+      "Amazon EventBridge and AWS Lambda triggering SageMaker Pipelines",
+      "Cron job on an EC2 instance",
+      "AWS CloudTrail and SNS",
+      "SageMaker Model Monitor"
+    ],
+    "correctIndex": 0,
+    "explanation": "EventBridge can detect S3 object upload events and trigger a Lambda function or directly start a SageMaker Pipeline execution to retrain the model.",
+    "topics": [
+      "ML_OPS",
+      "SAGEMAKER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q11",
+    "text": "Which AWS service is used to label raw data, such as images or text, for machine learning?",
+    "options": [
+      "Amazon SageMaker Ground Truth",
+      "Amazon Rekognition",
+      "Amazon Comprehend",
+      "Amazon Mechanical Turk"
+    ],
+    "correctIndex": 0,
+    "explanation": "Amazon SageMaker Ground Truth is a fully managed data labeling service that makes it easy to build highly accurate training datasets for machine learning.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q12",
+    "text": "You want to monitor your deployed SageMaker model for data drift. Which feature should you use?",
+    "options": [
+      "SageMaker Debugger",
+      "SageMaker Model Monitor",
+      "SageMaker Clarify",
+      "CloudWatch Logs"
+    ],
+    "correctIndex": 1,
+    "explanation": "SageMaker Model Monitor continuously monitors the quality of Amazon SageMaker machine learning models in production and detects data drift and concept drift.",
+    "topics": [
+      "SAGEMAKER",
+      "ML_OPS"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q13",
+    "text": "What is the primary purpose of Amazon SageMaker Clarify?",
+    "options": [
+      "To debug training jobs",
+      "To detect bias in data and models and explain model predictions",
+      "To optimize model hyperparameters",
+      "To label training data"
+    ],
+    "correctIndex": 1,
+    "explanation": "SageMaker Clarify provides bias detection across the ML lifecycle and model explainability (feature importance).",
+    "topics": [
+      "SAGEMAKER",
+      "EVAL"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q14",
+    "text": "You have a large dataset in S3 that needs to be processed by a fleet of EC2 instances. The processing requires high aggregate throughput. Which S3 access pattern is recommended?",
+    "options": [
+      "Accessing S3 directly over the internet",
+      "Using a VPC Endpoint for S3",
+      "Copying data to EBS volumes",
+      "Using S3 Transfer Acceleration"
+    ],
+    "correctIndex": 1,
+    "explanation": "A VPC Endpoint for S3 allows EC2 instances in a private subnet to access S3 securely and with high performance over the AWS network, avoiding internet traversal.",
+    "topics": [
+      "SECURITY_COST",
+      "DATA_TRANSFER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q15",
+    "text": "Which cost optimization strategy is most effective for SageMaker training jobs that can be interrupted?",
+    "options": [
+      "Reserved Instances",
+      "Savings Plans",
+      "Managed Spot Training",
+      "On-Demand Instances"
+    ],
+    "correctIndex": 2,
+    "explanation": "Managed Spot Training uses Amazon EC2 Spot instances to run training jobs, which can save up to 90% of the cost compared to On-Demand instances. SageMaker handles the interruptions automatically.",
+    "topics": [
+      "SECURITY_COST",
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q16",
+    "text": "You are building a real-time recommendation engine using Amazon Kinesis Data Streams. You need to process the data with sub-second latency. Which consumer type should you use?",
+    "options": [
+      "Standard Consumer",
+      "Enhanced Fan-Out Consumer",
+      "Kinesis Data Firehose",
+      "Kinesis Data Analytics"
+    ],
+    "correctIndex": 1,
+    "explanation": "Enhanced Fan-Out consumers have dedicated throughput of 2 MB/second per shard and delivery latencies of approximately 70 milliseconds, making them ideal for real-time applications.",
+    "topics": [
+      "DATA_TRANSFER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q17",
+    "text": "Which AWS service allows you to run Apache Spark workloads without managing clusters?",
+    "options": [
+      "Amazon EMR",
+      "Amazon EMR Serverless",
+      "AWS Glue",
+      "Amazon Athena"
+    ],
+    "correctIndex": 1,
+    "explanation": "Amazon EMR Serverless is a serverless option in Amazon EMR that makes it easy to run applications using open-source big data frameworks like Apache Spark and Hive without configuring, managing, or scaling clusters.",
+    "topics": [
+      "ML_OPS"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q18",
+    "text": "You want to store features for machine learning models to enable reuse and consistency across training and inference. Which SageMaker feature should you use?",
+    "options": [
+      "SageMaker Data Wrangler",
+      "SageMaker Feature Store",
+      "SageMaker Experiments",
+      "SageMaker Model Registry"
+    ],
+    "correctIndex": 1,
+    "explanation": "Amazon SageMaker Feature Store is a fully managed, purpose-built repository to store, update, retrieve, and share machine learning features.",
+    "topics": [
+      "SAGEMAKER",
+      "ML_OPS"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q19",
+    "text": "Which technique helps to address the vanishing gradient problem in Recurrent Neural Networks (RNNs)?",
+    "options": [
+      "Using a larger learning rate",
+      "Using Long Short-Term Memory (LSTM) units",
+      "Increasing the number of layers",
+      "Using Sigmoid activation functions"
+    ],
+    "correctIndex": 1,
+    "explanation": "LSTMs are designed to avoid the long-term dependency problem (vanishing gradient) by using gates to control the flow of information.",
+    "topics": [
+      "EVAL"
+    ],
+    "difficulty": "HARD"
+  },
+  {
+    "id": "q20",
+    "text": "You are using Amazon Glue to prepare data for machine learning. You need to identify the schema of your data stored in S3. What should you use?",
+    "options": [
+      "Glue Job",
+      "Glue Crawler",
+      "Glue DataBrew",
+      "Glue Workflow"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Glue Crawler connects to a data store, progresses through a prioritized list of classifiers to determine the schema for your data, and then creates metadata tables in the AWS Glue Data Catalog.",
+    "topics": [
+      "ML_OPS",
+      "DATA_TRANSFER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q21",
+    "text": "Which AWS service is best suited for near real-time ingestion of streaming data into Amazon S3, Redshift, or OpenSearch?",
+    "options": [
+      "Amazon Kinesis Data Streams",
+      "Amazon Kinesis Data Firehose",
+      "Amazon MSK",
+      "AWS DataSync"
+    ],
+    "correctIndex": 1,
+    "explanation": "Amazon Kinesis Data Firehose is the easiest way to reliably load streaming data into data lakes, data stores, and analytics services. It can batch, compress, transform, and encrypt data before loading it.",
+    "topics": [
+      "DATA_TRANSFER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q22",
+    "text": "You are training a deep learning model on a large dataset of high-resolution images. The training is taking too long. Which instance type family is recommended for accelerating deep learning training?",
+    "options": [
+      "C5 instances",
+      "M5 instances",
+      "P3 or P4 instances",
+      "R5 instances"
+    ],
+    "correctIndex": 2,
+    "explanation": "P3 and P4 instances are GPU-based instances optimized for machine learning and high-performance computing applications, providing significant acceleration for deep learning training.",
+    "topics": [
+      "SAGEMAKER",
+      "STORAGE"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q23",
+    "text": "What is the purpose of the 'random_state' or 'seed' parameter in machine learning algorithms?",
+    "options": [
+      "To improve model accuracy",
+      "To ensure reproducibility of results",
+      "To speed up training",
+      "To prevent overfitting"
+    ],
+    "correctIndex": 1,
+    "explanation": "Setting a random seed ensures that the random number generation is deterministic, meaning you get the same results every time you run the code with the same data and parameters.",
+    "topics": [
+      "EVAL"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q24",
+    "text": "Which SageMaker tool allows you to visually explore, clean, and prepare data for machine learning without writing code?",
+    "options": [
+      "SageMaker Data Wrangler",
+      "SageMaker Processing",
+      "SageMaker Autopilot",
+      "SageMaker Studio"
+    ],
+    "correctIndex": 0,
+    "explanation": "SageMaker Data Wrangler reduces the time it takes to aggregate and prepare data for machine learning from weeks to minutes using a visual interface.",
+    "topics": [
+      "SAGEMAKER",
+      "ML_OPS"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q25",
+    "text": "You need to grant an EC2 instance access to an S3 bucket. What is the most secure way to do this?",
+    "options": [
+      "Embed AWS credentials in the application code",
+      "Store credentials in a configuration file on the instance",
+      "Create an IAM role with S3 permissions and attach it to the EC2 instance",
+      "Create an IAM user and pass the access keys to the instance"
+    ],
+    "correctIndex": 2,
+    "explanation": "Using an IAM role attached to the EC2 instance is the most secure method as it provides temporary security credentials that are automatically rotated.",
+    "topics": [
+      "SECURITY_COST"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q26",
+    "text": "Which algorithm is a supervised learning algorithm used for both classification and regression tasks?",
+    "options": [
+      "K-Means Clustering",
+      "Principal Component Analysis (PCA)",
+      "Random Forest",
+      "Apriori"
+    ],
+    "correctIndex": 2,
+    "explanation": "Random Forest is an ensemble learning method that operates by constructing a multitude of decision trees at training time. It can be used for both classification and regression.",
+    "topics": [
+      "EVAL"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q27",
+    "text": "You want to automatically tune the hyperparameters of a machine learning model to find the best configuration. Which SageMaker feature should you use?",
+    "options": [
+      "SageMaker Autopilot",
+      "SageMaker Automatic Model Tuning (Hyperparameter Tuning)",
+      "SageMaker Debugger",
+      "SageMaker Experiments"
+    ],
+    "correctIndex": 1,
+    "explanation": "SageMaker Automatic Model Tuning finds the best version of a model by running many training jobs on your dataset using the algorithm and ranges of hyperparameters that you specify.",
+    "topics": [
+      "SAGEMAKER",
+      "XGBOOST"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q28",
+    "text": "In a confusion matrix, what does a 'False Negative' represent?",
+    "options": [
+      "The model correctly predicted the negative class",
+      "The model incorrectly predicted the positive class",
+      "The model incorrectly predicted the negative class (missed a positive case)",
+      "The model correctly predicted the positive class"
+    ],
+    "correctIndex": 2,
+    "explanation": "A False Negative occurs when the model predicts the negative class, but the actual class was positive. It 'missed' detecting the condition.",
+    "topics": [
+      "EVAL"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q29",
+    "text": "Which AWS service provides a fully managed, serverless time series database?",
+    "options": [
+      "Amazon DynamoDB",
+      "Amazon Timestream",
+      "Amazon RDS",
+      "Amazon Neptune"
+    ],
+    "correctIndex": 1,
+    "explanation": "Amazon Timestream is a fast, scalable, and serverless time series database service for IoT and operational applications.",
+    "topics": [
+      "STORAGE"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q30",
+    "text": "You are using Amazon Rekognition to identify objects in images. You want to detect custom objects specific to your business (e.g., your company's logo). What should you use?",
+    "options": [
+      "Rekognition Custom Labels",
+      "Rekognition Image Moderation",
+      "Rekognition Face Search",
+      "Rekognition Text in Image"
+    ],
+    "correctIndex": 0,
+    "explanation": "Amazon Rekognition Custom Labels allows you to train a model to identify the objects and scenes in images that are specific to your business needs.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q31",
+    "text": "You are building a machine learning pipeline using Amazon SageMaker Pipelines. You need to ensure that a model is only deployed to production if its accuracy on the test set is higher than 90%. Which step should you use in your pipeline?",
+    "options": [
+      "ProcessingStep",
+      "ConditionStep",
+      "TuningStep",
+      "CallbackStep"
+    ],
+    "correctIndex": 1,
+    "explanation": "A ConditionStep allows you to evaluate the performance of a model (e.g., check if accuracy > 0.9) and conditionally execute subsequent steps, such as model registration or deployment.",
+    "topics": [
+      "SAGEMAKER",
+      "ML_OPS"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q32",
+    "text": "Your team has trained a new XGBoost model and registered it in the SageMaker Model Registry. You want to trigger a deployment pipeline automatically when the model package version status is updated to 'Approved'. which service integration achieves this?",
+    "options": [
+      "Amazon EventBridge rule matching SageMaker Model Package State Change",
+      "SageMaker Model Monitor",
+      "AWS CloudTrail with SNS",
+      "SageMaker Pipelines Callback"
+    ],
+    "correctIndex": 0,
+    "explanation": "SageMaker Model Registry emits events to Amazon EventBridge when a model package version status changes. You can create a rule to trigger a Lambda function or a CodePipeline deployment when the status becomes 'Approved'.",
+    "topics": [
+      "SAGEMAKER",
+      "ML_OPS"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q33",
+    "text": "You are designing a real-time fraud detection system. You need to look up historical transaction aggregates (e.g., total spend in last 10 mins) with single-digit millisecond latency during inference. Which solution should you use?",
+    "options": [
+      "Amazon S3 Select",
+      "SageMaker Feature Store (Online Store)",
+      "SageMaker Feature Store (Offline Store)",
+      "Amazon Athena"
+    ],
+    "correctIndex": 1,
+    "explanation": "SageMaker Feature Store Online Store is designed for low-latency, real-time record retrieval, making it ideal for serving features during inference.",
+    "topics": [
+      "SAGEMAKER",
+      "DATA_TRANSFER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q34",
+    "text": "You have a dataset in Amazon S3 containing sensitive PII. You want to visualize the distribution of the data and detect potential bias without writing complex code or extracting the data manually. Which tool is best suited?",
+    "options": [
+      "SageMaker Data Wrangler",
+      "AWS Glue DataBrew",
+      "SageMaker Clarify",
+      "Amazon QuickSight"
+    ],
+    "correctIndex": 0,
+    "explanation": "SageMaker Data Wrangler allows you to import, analyze, and visualize data using a GUI. It includes built-in analysis types for bias detection and data distribution visualization.",
+    "topics": [
+      "SAGEMAKER",
+      "SECURITY_COST"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q35",
+    "text": "You are training a model on a dataset with a severe class imbalance (1% positive class). You decide to use SMOTE (Synthetic Minority Over-sampling Technique). When should you apply SMOTE?",
+    "options": [
+      "On the entire dataset before splitting",
+      "On the test set only",
+      "On the training set only",
+      "On both training and validation sets"
+    ],
+    "correctIndex": 2,
+    "explanation": "SMOTE should only be applied to the training set. Applying it to the test or validation sets causes data leakage, as synthetic samples would be generated based on the distribution of the entire dataset.",
+    "topics": [
+      "EVAL"
+    ],
+    "difficulty": "HARD"
+  },
+  {
+    "id": "q36",
+    "text": "Which metric is most appropriate for evaluating a regression model where you want to penalize large errors more significantly than small errors?",
+    "options": [
+      "MAE (Mean Absolute Error)",
+      "RMSE (Root Mean Squared Error)",
+      "R-Squared",
+      "Accuracy"
+    ],
+    "correctIndex": 1,
+    "explanation": "RMSE squares the errors before averaging, which gives a higher weight to large errors compared to MAE.",
+    "topics": [
+      "EVAL"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q37",
+    "text": "You are using SageMaker Distributed Data Parallel (SMDDP) library. What is the primary use case for this library?",
+    "options": [
+      "To train models that are too large to fit in a single GPU memory",
+      "To speed up training by splitting the training data across multiple GPUs/nodes",
+      "To perform hyperparameter tuning in parallel",
+      "To deploy models to multiple availability zones"
+    ],
+    "correctIndex": 1,
+    "explanation": "SMDDP is optimized for data parallelism, where the model is replicated on each worker and trained on a subset of the data, syncing gradients.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q38",
+    "text": "You have a large number of small, uncompressed JSON files in S3 that you want to process using PySpark on Amazon EMR. The job is running slowly. What is the most effective optimization?",
+    "options": [
+      "Increase the size of the EMR cluster",
+      "Convert the JSON files to Parquet or ORC format",
+      "Use GZIP compression on the JSON files",
+      "Use a larger instance type"
+    ],
+    "correctIndex": 1,
+    "explanation": "Converting to a columnar format like Parquet or ORC significantly improves performance for Spark jobs by allowing for splittability, better compression, and column pruning.",
+    "topics": [
+      "DATA_TRANSFER",
+      "ML_OPS"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q39",
+    "text": "Which AWS service is used to detect sensitive data such as PII in S3 buckets automatically?",
+    "options": [
+      "Amazon GuardDuty",
+      "Amazon Macie",
+      "Amazon Inspector",
+      "AWS Shield"
+    ],
+    "correctIndex": 1,
+    "explanation": "Amazon Macie is a fully managed data security and data privacy service that uses machine learning and pattern matching to discover and protect sensitive data in AWS.",
+    "topics": [
+      "SECURITY_COST"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q40",
+    "text": "You are deploying a model that requires pre-processing (e.g., resizing images) and post-processing (e.g., formatting output). You want to encapsulate these steps with the model on a single SageMaker endpoint. What should you use?",
+    "options": [
+      "SageMaker Serial Inference Pipeline",
+      "AWS Step Functions",
+      "SageMaker Multi-Model Endpoint",
+      "Lambda function invoking the endpoint"
+    ],
+    "correctIndex": 0,
+    "explanation": "A Serial Inference Pipeline allows you to deploy a linear sequence of containers (e.g., pre-processing -> model -> post-processing) to a single endpoint.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q41",
+    "text": "Your deployed model's performance is degrading over time because the distribution of the incoming data is changing compared to the training data. What is this phenomenon called?",
+    "options": [
+      "Model Overfitting",
+      "Data Drift (Feature Drift)",
+      "Concept Drift",
+      "Bias Drift"
+    ],
+    "correctIndex": 1,
+    "explanation": "Data Drift (or Feature Drift) occurs when the statistical properties of the input data change over time.",
+    "topics": [
+      "ML_OPS",
+      "EVAL"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q42",
+    "text": "You need to ingest a stream of clickstream data, transform it using a Lambda function, and load it into Amazon OpenSearch Service. Which service is the simplest to configure for this task?",
+    "options": [
+      "Amazon Kinesis Data Streams",
+      "Amazon Kinesis Data Firehose",
+      "Amazon MSK",
+      "AWS Glue Streaming"
+    ],
+    "correctIndex": 1,
+    "explanation": "Kinesis Data Firehose is a fully managed service that can capture, transform (via Lambda), and load streaming data into destinations like S3, Redshift, and OpenSearch.",
+    "topics": [
+      "DATA_TRANSFER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q43",
+    "text": "Which technique is used to reduce the dimensionality of a dataset while retaining the most variance?",
+    "options": [
+      "K-Means Clustering",
+      "Principal Component Analysis (PCA)",
+      "Linear Regression",
+      "Random Cut Forest"
+    ],
+    "correctIndex": 1,
+    "explanation": "PCA is a linear dimensionality reduction technique that transforms the data into a new coordinate system where the greatest variance lies on the first coordinates (principal components).",
+    "topics": [
+      "EVAL"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q44",
+    "text": "You are training a deep learning model for object detection. You need to annotate bounding boxes on thousands of images. Which service should you use?",
+    "options": [
+      "Amazon Rekognition",
+      "SageMaker Ground Truth",
+      "Amazon Mechanical Turk directly",
+      "SageMaker Data Wrangler"
+    ],
+    "correctIndex": 1,
+    "explanation": "SageMaker Ground Truth provides a managed experience for data labeling, including bounding boxes for object detection, using either private workforces, vendors, or Mechanical Turk.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q45",
+    "text": "You want to run a one-time query on a large CSV dataset stored in S3 to calculate the average value of a column. You do not want to provision any infrastructure. Which service should you use?",
+    "options": [
+      "Amazon Redshift",
+      "Amazon Athena",
+      "Amazon EMR",
+      "Amazon RDS"
+    ],
+    "correctIndex": 1,
+    "explanation": "Amazon Athena is a serverless, interactive query service that makes it easy to analyze data in Amazon S3 using standard SQL.",
+    "topics": [
+      "DATA_TRANSFER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q46",
+    "text": "Which SageMaker feature allows you to compare the performance of multiple training jobs to identify the best model?",
+    "options": [
+      "SageMaker Experiments",
+      "SageMaker Debugger",
+      "SageMaker Model Monitor",
+      "SageMaker Clarify"
+    ],
+    "correctIndex": 0,
+    "explanation": "SageMaker Experiments allows you to organize, track, compare, and evaluate machine learning experiments and training runs.",
+    "topics": [
+      "SAGEMAKER",
+      "ML_OPS"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q47",
+    "text": "You are using the Random Cut Forest (RCF) algorithm in SageMaker. What is the primary use case for RCF?",
+    "options": [
+      "Image Classification",
+      "Anomaly Detection",
+      "Time Series Forecasting",
+      "Topic Modeling"
+    ],
+    "correctIndex": 1,
+    "explanation": "Random Cut Forest (RCF) is an unsupervised algorithm for detecting anomalous data points within a dataset (e.g., spikes in time series).",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q48",
+    "text": "You have a categorical feature 'Color' with values 'Red', 'Green', 'Blue'. Which encoding technique is most suitable for a linear regression model?",
+    "options": [
+      "Label Encoding",
+      "One-Hot Encoding",
+      "Target Encoding",
+      "Frequency Encoding"
+    ],
+    "correctIndex": 1,
+    "explanation": "One-Hot Encoding creates binary columns for each category. This is preferred for linear models to avoid implying an ordinal relationship (e.g., Red < Green) which Label Encoding would introduce.",
+    "topics": [
+      "EVAL"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q49",
+    "text": "You want to securely connect your SageMaker Studio notebooks in a VPC to S3 without traffic traversing the public internet. What should you configure?",
+    "options": [
+      "NAT Gateway",
+      "Internet Gateway",
+      "VPC Endpoint (Gateway Endpoint for S3)",
+      "VPN Connection"
+    ],
+    "correctIndex": 2,
+    "explanation": "A VPC Gateway Endpoint for S3 allows instances in a private subnet to access S3 securely over the AWS network without requiring an Internet Gateway or NAT Gateway.",
+    "topics": [
+      "SECURITY_COST"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q50",
+    "text": "Which AWS service is best suited for building a conversational interface (chatbot) using voice and text?",
+    "options": [
+      "Amazon Polly",
+      "Amazon Transcribe",
+      "Amazon Lex",
+      "Amazon Connect"
+    ],
+    "correctIndex": 2,
+    "explanation": "Amazon Lex is a service for building conversational interfaces into any application using voice and text.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q51",
+    "text": "You are training a model using SageMaker. You want to stop the training job early if the validation loss has not improved for 5 consecutive epochs. What feature should you use?",
+    "options": [
+      "Managed Spot Training",
+      "Automatic Model Tuning",
+      "Early Stopping (in Hyperparameter Tuning or Framework callback)",
+      "SageMaker Debugger"
+    ],
+    "correctIndex": 2,
+    "explanation": "Early stopping allows you to terminate training when a monitored metric (like validation loss) stops improving, saving time and cost.",
+    "topics": [
+      "SAGEMAKER",
+      "EVAL"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q52",
+    "text": "Which file format is recommended for high-performance training with SageMaker's Pipe Mode?",
+    "options": [
+      "CSV",
+      "JSON",
+      "RecordIO-Protobuf",
+      "Parquet"
+    ],
+    "correctIndex": 2,
+    "explanation": "RecordIO-Protobuf is a binary format optimized for streaming data. SageMaker Pipe Mode streams data directly from S3 to the training container, and RecordIO is the most efficient format for this.",
+    "topics": [
+      "SAGEMAKER",
+      "DATA_TRANSFER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q53",
+    "text": "You need to extract text from scanned PDF documents, including forms and tables. Which service should you use?",
+    "options": [
+      "Amazon Comprehend",
+      "Amazon Textract",
+      "Amazon Rekognition",
+      "Amazon Translate"
+    ],
+    "correctIndex": 1,
+    "explanation": "Amazon Textract is a machine learning service that automatically extracts text, handwriting, and data from scanned documents, including forms and tables.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q54",
+    "text": "You are using SageMaker Autopilot. Which of the following is NOT a step in the Autopilot process?",
+    "options": [
+      "Data exploration and candidate generation",
+      "Feature engineering",
+      "Model tuning",
+      "Manual hyperparameter selection"
+    ],
+    "correctIndex": 3,
+    "explanation": "SageMaker Autopilot automates the entire process, including hyperparameter selection. Manual selection is not part of the standard Autopilot workflow.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q55",
+    "text": "What is the primary benefit of using Amazon EFS for SageMaker training jobs?",
+    "options": [
+      "Lowest cost storage",
+      "Fastest possible I/O performance",
+      "Persistent file system shared across multiple instances/jobs",
+      "Integration with S3 Select"
+    ],
+    "correctIndex": 2,
+    "explanation": "Amazon EFS provides a persistent, shared file system. This is useful for iterative training where you don't want to download data from S3 every time, or for distributed training where workers need shared access.",
+    "topics": [
+      "STORAGE"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q56",
+    "text": "You want to ensure that your SageMaker training container does not have root access. What should you configure?",
+    "options": [
+      "Network Isolation",
+      "VPC Config",
+      "Enable Inter-Container Traffic Encryption",
+      "Run-as user (UID) in the Dockerfile"
+    ],
+    "correctIndex": 3,
+    "explanation": "You should configure the Docker container to run as a non-root user (specify a UID) to follow the principle of least privilege.",
+    "topics": [
+      "SECURITY_COST"
+    ],
+    "difficulty": "HARD"
+  },
+  {
+    "id": "q57",
+    "text": "Which algorithm is best suited for forecasting the demand for a product based on historical sales data?",
+    "options": [
+      "XGBoost",
+      "DeepAR",
+      "K-Means",
+      "Object2Vec"
+    ],
+    "correctIndex": 1,
+    "explanation": "DeepAR is a supervised learning algorithm for forecasting scalar (one-dimensional) time series using recurrent neural networks (RNNs).",
+    "topics": [
+      "SAGEMAKER",
+      "EVAL"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q58",
+    "text": "You have a dataset with missing values. You decide to replace the missing values with the mean of the column. What is this technique called?",
+    "options": [
+      "Dropping",
+      "Imputation",
+      "Normalization",
+      "Standardization"
+    ],
+    "correctIndex": 1,
+    "explanation": "Imputation is the process of replacing missing data with substituted values (like mean, median, or mode).",
+    "topics": [
+      "EVAL"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q59",
+    "text": "You want to monitor the bias of your model in production. Which SageMaker tool should you use?",
+    "options": [
+      "SageMaker Model Monitor (Bias Drift)",
+      "SageMaker Debugger",
+      "SageMaker Profiler",
+      "CloudWatch Metrics"
+    ],
+    "correctIndex": 0,
+    "explanation": "SageMaker Model Monitor can be configured to detect bias drift by comparing the bias metrics of the live data against the baseline.",
+    "topics": [
+      "SAGEMAKER",
+      "ML_OPS"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q60",
+    "text": "Which AWS service allows you to create, publish, maintain, monitor, and secure APIs at any scale?",
+    "options": [
+      "Amazon API Gateway",
+      "AWS AppSync",
+      "Elastic Load Balancer",
+      "AWS Direct Connect"
+    ],
+    "correctIndex": 0,
+    "explanation": "Amazon API Gateway is a fully managed service that makes it easy for developers to create, publish, maintain, monitor, and secure APIs. It is often used to expose SageMaker endpoints.",
+    "topics": [
+      "ML_OPS"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q61",
+    "text": "You are using BlazingText algorithm in SageMaker. What are the two supported modes?",
+    "options": [
+      "Supervised (Text Classification) and Unsupervised (Word2Vec)",
+      "Regression and Classification",
+      "Clustering and Forecasting",
+      "Topic Modeling and Sentiment Analysis"
+    ],
+    "correctIndex": 0,
+    "explanation": "BlazingText supports Word2Vec (unsupervised) for generating word embeddings and Text Classification (supervised).",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q62",
+    "text": "You need to encrypt the model artifacts generated by your SageMaker training job. Which key does SageMaker use by default if you don't specify one?",
+    "options": [
+      "The AWS managed key for Amazon S3 (SSE-S3)",
+      "The AWS managed key for SageMaker",
+      "A customer managed key",
+      "It does not encrypt by default"
+    ],
+    "correctIndex": 0,
+    "explanation": "By default, SageMaker stores artifacts in the S3 bucket encrypted using SSE-S3 (AWS managed key for S3). You can optionally specify a KMS key.",
+    "topics": [
+      "SECURITY_COST"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q63",
+    "text": "Which visualization is best for checking if your dataset has a class imbalance?",
+    "options": [
+      "Scatter Plot",
+      "Histogram / Bar Chart",
+      "Box Plot",
+      "Correlation Matrix"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Histogram or Bar Chart showing the count of each class label is the most direct way to visualize class imbalance.",
+    "topics": [
+      "EVAL"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q64",
+    "text": "You are using Glue to run ETL jobs. You want to use a custom Python library that is not included in the standard Glue environment. What should you do?",
+    "options": [
+      "You cannot use custom libraries in Glue",
+      "Package the library in a .zip or .whl file and reference it in the job parameters (--extra-py-files)",
+      "Install the library on every worker node manually",
+      "Use a Docker container"
+    ],
+    "correctIndex": 1,
+    "explanation": "You can provide external Python libraries by packaging them and uploading to S3, then referencing them using the `--extra-py-files` parameter.",
+    "topics": [
+      "DATA_TRANSFER",
+      "ML_OPS"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q65",
+    "text": "Which SageMaker instance type family is recommended for inference workloads that require high throughput and low latency at a low cost?",
+    "options": [
+      "ml.p3 instances",
+      "ml.c5 instances",
+      "ml.inf1 / ml.inf2 instances",
+      "ml.m5 instances"
+    ],
+    "correctIndex": 2,
+    "explanation": "AWS Inferentia (inf1/inf2) instances are designed specifically to provide high performance and low cost for machine learning inference.",
+    "topics": [
+      "SAGEMAKER",
+      "SECURITY_COST"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q66",
+    "text": "You want to use your own custom algorithm container in SageMaker. What is the requirement for the Docker container entrypoint?",
+    "options": [
+      "It must be a python script",
+      "It must be executable",
+      "It must listen on port 8080 for inference",
+      "All of the above"
+    ],
+    "correctIndex": 3,
+    "explanation": "For inference, the container must have an executable entrypoint that starts a web server listening on port 8080 and responds to /invocations and /ping.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "HARD"
+  },
+  {
+    "id": "q67",
+    "text": "What is the purpose of the 'validation' channel in a SageMaker training job?",
+    "options": [
+      "To train the model",
+      "To evaluate the model during training and prevent overfitting",
+      "To test the final model performance",
+      "To store the model artifacts"
+    ],
+    "correctIndex": 1,
+    "explanation": "The validation channel provides data used to evaluate the model's performance after each epoch, helping to tune hyperparameters and detect overfitting.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q68",
+    "text": "You are building a recommendation system. Which algorithm is commonly used for this purpose?",
+    "options": [
+      "Factorization Machines",
+      "Linear Learner",
+      "Image Classification",
+      "Seq2Seq"
+    ],
+    "correctIndex": 0,
+    "explanation": "Factorization Machines are a general-purpose supervised learning algorithm that you can use for both classification and regression tasks. They are a good choice for recommendation systems handling high-dimensional sparse data.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q69",
+    "text": "Which AWS service is used to orchestrate complex workflows involving multiple AWS services (e.g., Glue, Lambda, SageMaker)?",
+    "options": [
+      "AWS Step Functions",
+      "Amazon EventBridge",
+      "AWS Config",
+      "AWS CloudFormation"
+    ],
+    "correctIndex": 0,
+    "explanation": "AWS Step Functions is a serverless orchestration service that lets you combine AWS Lambda functions and other AWS services to build business-critical applications.",
+    "topics": [
+      "ML_OPS"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q70",
+    "text": "You want to query data in S3 using Athena, but the data is encrypted with a KMS key. What permission does the Athena user need?",
+    "options": [
+      "s3:GetObject only",
+      "kms:Decrypt on the key",
+      "athena:RunQuery only",
+      "iam:PassRole"
+    ],
+    "correctIndex": 1,
+    "explanation": "To read encrypted data, the user (or the role Athena assumes) must have `kms:Decrypt` permission for the key used to encrypt the data.",
+    "topics": [
+      "SECURITY_COST"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q71",
+    "text": "Which technique can be used to handle missing values in a time series dataset?",
+    "options": [
+      "Forward Fill / Backward Fill",
+      "SMOTE",
+      "One-Hot Encoding",
+      "Binning"
+    ],
+    "correctIndex": 0,
+    "explanation": "Forward Fill (propagating the last valid observation forward) or Backward Fill are common techniques for imputing missing values in time series data.",
+    "topics": [
+      "EVAL"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q72",
+    "text": "You are using SageMaker Debugger. What is a 'Rule'?",
+    "options": [
+      "A Python script that defines the model architecture",
+      "A condition that Debugger monitors (e.g., vanishing gradient, overfitting)",
+      "A security policy",
+      "A hyperparameter range"
+    ],
+    "correctIndex": 1,
+    "explanation": "In SageMaker Debugger, a Rule is a Python script that checks for specific conditions during training, such as vanishing gradients, overfitting, or loss not decreasing.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q73",
+    "text": "You have a large text corpus and want to group similar documents together without predefined labels. Which algorithm should you use?",
+    "options": [
+      "Latent Dirichlet Allocation (LDA)",
+      "BlazingText (Text Classification)",
+      "Seq2Seq",
+      "Object Detection"
+    ],
+    "correctIndex": 0,
+    "explanation": "LDA is an unsupervised learning algorithm used for topic modeling, which groups documents based on shared topics.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q74",
+    "text": "Which AWS service provides a managed JupyterLab environment for machine learning?",
+    "options": [
+      "SageMaker Studio",
+      "AWS Cloud9",
+      "Amazon WorkSpaces",
+      "EC2 Instance Connect"
+    ],
+    "correctIndex": 0,
+    "explanation": "SageMaker Studio is a fully integrated development environment (IDE) for machine learning that provides a managed JupyterLab interface.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q75",
+    "text": "You want to reduce the inference latency of a deep learning model on an edge device. Which tool should you use to optimize the model?",
+    "options": [
+      "SageMaker Neo",
+      "SageMaker Debugger",
+      "SageMaker Autopilot",
+      "AWS DeepRacer"
+    ],
+    "correctIndex": 0,
+    "explanation": "SageMaker Neo compiles and optimizes machine learning models to run up to twice as fast on cloud and edge devices with less than a tenth of the memory footprint.",
+    "topics": [
+      "SAGEMAKER",
+      "ML_OPS"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q76",
+    "text": "What is the difference between 'Accuracy' and 'AUC' (Area Under the Curve)?",
+    "options": [
+      "Accuracy depends on the classification threshold, AUC does not",
+      "AUC depends on the threshold, Accuracy does not",
+      "They are the same",
+      "Accuracy is for regression, AUC is for classification"
+    ],
+    "correctIndex": 0,
+    "explanation": "Accuracy is calculated at a specific threshold (e.g., 0.5). AUC measures the ability of the model to distinguish between classes across ALL possible thresholds.",
+    "topics": [
+      "EVAL"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q77",
+    "text": "You are using K-Fold Cross Validation. What is the main advantage of this technique?",
+    "options": [
+      "It trains the model faster",
+      "It provides a more robust estimate of model performance on unseen data",
+      "It eliminates the need for a test set",
+      "It automatically tunes hyperparameters"
+    ],
+    "correctIndex": 1,
+    "explanation": "K-Fold Cross Validation reduces the variance of the performance estimate by averaging results across k different splits of the data.",
+    "topics": [
+      "EVAL"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q78",
+    "text": "Which SageMaker feature allows you to shadow your production model with a new model to evaluate its performance without impacting users?",
+    "options": [
+      "Shadow Mode (Inference Experiment)",
+      "A/B Testing",
+      "Canary Deployment",
+      "Blue/Green Deployment"
+    ],
+    "correctIndex": 0,
+    "explanation": "Shadow Mode allows you to route a copy of the inference requests to a shadow model and track its performance, while the production model continues to serve the actual responses.",
+    "topics": [
+      "SAGEMAKER",
+      "ML_OPS"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q79",
+    "text": "You need to process a large dataset of images stored in S3 using a custom script on multiple EC2 instances. You want to coordinate the work and handle retries. Which service is best?",
+    "options": [
+      "AWS Batch",
+      "AWS Lambda",
+      "Amazon ECS",
+      "SageMaker Training"
+    ],
+    "correctIndex": 0,
+    "explanation": "AWS Batch enables you to run batch computing workloads on the AWS Cloud. It dynamically provisions the optimal quantity and type of compute resources and handles job dependencies and retries.",
+    "topics": [
+      "ML_OPS"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q80",
+    "text": "Which IAM policy element allows you to specify the allowed IP addresses for accessing a resource?",
+    "options": [
+      "Principal",
+      "Action",
+      "Condition",
+      "Resource"
+    ],
+    "correctIndex": 2,
+    "explanation": "The 'Condition' element allows you to specify conditions for when the policy is in effect, such as `aws:SourceIp` to restrict access to specific IP ranges.",
+    "topics": [
+      "SECURITY_COST"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q81",
+    "text": "You are building a recommendation engine using Amazon Personalize. You have user-item interaction data. Which recipe should you use to recommend items similar to a specific item based on co-occurrence?",
+    "options": [
+      "aws-user-personalization",
+      "aws-sims",
+      "aws-popularity-count",
+      "aws-personalized-ranking"
+    ],
+    "correctIndex": 1,
+    "explanation": "The 'aws-sims' (Item-to-Item Similarities) recipe recommends items that are similar to a specific item based on how users interact with them (co-occurrence).",
+    "topics": [
+      "SAGEMAKER",
+      "ML_OPS"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q82",
+    "text": "You are training a model in SageMaker using Spot Instances. How does SageMaker handle the checkpointing to ensure training can resume if an instance is interrupted?",
+    "options": [
+      "You must manually implement checkpointing in your training script and save to /opt/ml/checkpoints",
+      "SageMaker automatically checkpoints memory to S3 every 5 minutes",
+      "Spot instances cannot be used for training jobs that require checkpointing",
+      "You must use EFS for checkpointing"
+    ],
+    "correctIndex": 0,
+    "explanation": "When using Managed Spot Training, you are responsible for saving model checkpoints to the local path `/opt/ml/checkpoints`. SageMaker automatically syncs this directory to S3.",
+    "topics": [
+      "SAGEMAKER",
+      "SECURITY_COST"
+    ],
+    "difficulty": "HARD"
+  },
+  {
+    "id": "q83",
+    "text": "Which AWS service is best suited for identifying personally identifiable information (PII) in a stream of customer support chat logs?",
+    "options": [
+      "Amazon Comprehend",
+      "Amazon Textract",
+      "Amazon Macie",
+      "Amazon Rekognition"
+    ],
+    "correctIndex": 0,
+    "explanation": "Amazon Comprehend is a natural language processing (NLP) service that can identify PII entities in text documents or streams.",
+    "topics": [
+      "SAGEMAKER",
+      "SECURITY_COST"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q84",
+    "text": "You are designing a data lake on S3. You want to enforce a schema on the data as it is written to the data lake to prevent data quality issues. Which service can help enforce this?",
+    "options": [
+      "AWS Glue Schema Registry",
+      "Amazon Athena",
+      "AWS Lake Formation",
+      "S3 Object Lock"
+    ],
+    "correctIndex": 0,
+    "explanation": "AWS Glue Schema Registry allows you to validate streaming data against a registered schema before it is written to the data lake.",
+    "topics": [
+      "DATA_TRANSFER",
+      "ML_OPS"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q85",
+    "text": "Which metric is best to evaluate a model's performance when the cost of a False Positive is much higher than a False Negative (e.g., email spam detection)?",
+    "options": [
+      "Recall",
+      "Precision",
+      "F1 Score",
+      "Accuracy"
+    ],
+    "correctIndex": 1,
+    "explanation": "Precision = TP / (TP + FP). Maximizing precision minimizes False Positives. In spam detection, marking a legitimate email as spam (FP) is worse than missing a spam email (FN).",
+    "topics": [
+      "EVAL"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q86",
+    "text": "You are using SageMaker Data Wrangler. You want to use a transformation that is not available in the built-in transforms. What should you do?",
+    "options": [
+      "Use the 'Custom Transform' step and write PySpark (SQL) or Python (Pandas) code",
+      "Export the data to S3 and process it with a Lambda function",
+      "You cannot use custom transformations in Data Wrangler",
+      "Use SageMaker Processing Jobs instead"
+    ],
+    "correctIndex": 0,
+    "explanation": "SageMaker Data Wrangler supports custom transformations using PySpark (SQL), Python (Pandas), or PySpark code.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q87",
+    "text": "What is the purpose of the 'Pipe Mode' in Amazon SageMaker algorithms?",
+    "options": [
+      "To pipeline multiple models together",
+      "To stream data from S3 directly to the algorithm container without downloading to disk",
+      "To pipe logs to CloudWatch",
+      "To connect to a VPC endpoint"
+    ],
+    "correctIndex": 1,
+    "explanation": "Pipe Mode streams data directly from S3 to the training instance using Linux pipes, which reduces startup time and disk space requirements compared to File Mode.",
+    "topics": [
+      "SAGEMAKER",
+      "DATA_TRANSFER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q88",
+    "text": "You have a regression problem. Your model is overfitting. Which regularization technique should you apply?",
+    "options": [
+      "L1 (Lasso) or L2 (Ridge) regularization",
+      "Increase the model complexity",
+      "Decrease the training data size",
+      "Use a smaller learning rate"
+    ],
+    "correctIndex": 0,
+    "explanation": "L1 and L2 regularization add a penalty term to the loss function based on the magnitude of the weights, encouraging simpler models and reducing overfitting.",
+    "topics": [
+      "EVAL",
+      "XGBOOST"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q89",
+    "text": "Which AWS service allows you to run containerized machine learning applications without managing servers or clusters?",
+    "options": [
+      "AWS Fargate",
+      "Amazon EC2",
+      "Amazon EMR",
+      "AWS DeepLearning AMIs"
+    ],
+    "correctIndex": 0,
+    "explanation": "AWS Fargate is a serverless compute engine for containers that works with Amazon ECS and EKS, allowing you to run containers without managing the underlying infrastructure.",
+    "topics": [
+      "ML_OPS"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q90",
+    "text": "You are using Amazon Forecast. You have related time series data (e.g., price, promotion status) that might help improve the forecast. How should you include this?",
+    "options": [
+      "Add it to the Target Time Series dataset",
+      "Add it to the Related Time Series dataset",
+      "Add it to the Item Metadata dataset",
+      "Forecast does not support related data"
+    ],
+    "correctIndex": 1,
+    "explanation": "The Related Time Series dataset in Amazon Forecast is used for time-dependent variables (like price or weather) that are related to the target time series.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q91",
+    "text": "Which SageMaker built-in algorithm is best for identifying topics in a collection of documents?",
+    "options": [
+      "Neural Topic Model (NTM) or LDA",
+      "BlazingText",
+      "Seq2Seq",
+      "Object2Vec"
+    ],
+    "correctIndex": 0,
+    "explanation": "Both NTM (Neural Topic Model) and LDA (Latent Dirichlet Allocation) are unsupervised algorithms designed for topic modeling.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q92",
+    "text": "You need to grant a third-party vendor access to a specific S3 bucket in your account to upload training data. What is the most secure way to do this?",
+    "options": [
+      "Create an IAM user with long-term credentials",
+      "Create a cross-account IAM role and allow the vendor's AWS account to assume it",
+      "Make the bucket public",
+      "Share the root account credentials"
+    ],
+    "correctIndex": 1,
+    "explanation": "Creating a cross-account IAM role allows the vendor to access resources in your account without sharing long-term credentials. You can restrict permissions to just the specific bucket.",
+    "topics": [
+      "SECURITY_COST"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q93",
+    "text": "In a neural network, what is the problem of 'Exploding Gradients'?",
+    "options": [
+      "Gradients become too small, stopping learning",
+      "Gradients accumulate and become very large, causing instability",
+      "The model overfits immediately",
+      "The learning rate is too low"
+    ],
+    "correctIndex": 1,
+    "explanation": "Exploding gradients occur when error gradients accumulate during backpropagation and result in very large updates to neural network weights, making the model unstable.",
+    "topics": [
+      "EVAL"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q94",
+    "text": "You are using SageMaker Model Monitor. It reports a 'Concept Drift'. What does this mean?",
+    "options": [
+      "The input data distribution has changed",
+      "The relationship between the input features and the target label has changed",
+      "The model endpoint is experiencing high latency",
+      "The bias metrics have exceeded the threshold"
+    ],
+    "correctIndex": 1,
+    "explanation": "Concept Drift occurs when the statistical relationship between the input features and the target variable changes (e.g., the definition of 'fraud' changes over time). Data Drift is when input distribution changes.",
+    "topics": [
+      "ML_OPS",
+      "EVAL"
+    ],
+    "difficulty": "HARD"
+  },
+  {
+    "id": "q95",
+    "text": "Which AWS service is best for orchestrating an ETL workflow that prepares data for ML, trains a model, and deploys it?",
+    "options": [
+      "AWS Glue workflows",
+      "SageMaker Pipelines",
+      "AWS Data Pipeline",
+      "Amazon AppFlow"
+    ],
+    "correctIndex": 1,
+    "explanation": "SageMaker Pipelines is a purpose-built CI/CD service for machine learning orchestration, integrating directly with SageMaker steps (Processing, Training, Register, Deploy).",
+    "topics": [
+      "SAGEMAKER",
+      "ML_OPS"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q96",
+    "text": "You have a dataset with many features. You want to select the most important features to reduce model complexity. Which XGBoost feature can help?",
+    "options": [
+      "Feature Importance (Gain/Cover/Frequency)",
+      "Tree Pruning",
+      "Regularization",
+      "Boosting"
+    ],
+    "correctIndex": 0,
+    "explanation": "XGBoost provides feature importance scores (Gain, Cover, Frequency) which can be used to identify and select the most predictive features.",
+    "topics": [
+      "XGBOOST",
+      "EVAL"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q97",
+    "text": "You are using Amazon Transcribe to convert speech to text. You want to remove sensitive PII from the output transcript. What should you do?",
+    "options": [
+      "Use Amazon Comprehend to redact PII after transcription",
+      "Enable PII Redaction (Content Redaction) in the Transcribe job settings",
+      "Use a custom vocabulary",
+      "It is not possible to redact PII automatically"
+    ],
+    "correctIndex": 1,
+    "explanation": "Amazon Transcribe has a built-in feature for Content Redaction that automatically identifies and redacts PII from the transcription output.",
+    "topics": [
+      "SAGEMAKER",
+      "SECURITY_COST"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q98",
+    "text": "Which SageMaker built-in algorithm is used for IP Insights (detecting anomalous IP usage)?",
+    "options": [
+      "IP Insights",
+      "Random Cut Forest",
+      "K-Means",
+      "Object2Vec"
+    ],
+    "correctIndex": 0,
+    "explanation": "IP Insights is a supervised algorithm that learns the usage patterns of IPv4 addresses and captures associations between IP addresses and entities (like User IDs) to detect anomalies.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q99",
+    "text": "You want to run a distributed training job for a TensorFlow model on SageMaker. Which distribution strategy is generally recommended for large models?",
+    "options": [
+      "Parameter Server",
+      "Horovod (MPI)",
+      "MapReduce",
+      "Spark"
+    ],
+    "correctIndex": 1,
+    "explanation": "Horovod (often used via MPI) is a popular distributed training framework for TensorFlow/PyTorch that uses ring-allreduce, which is generally more efficient than the Parameter Server model for large deep learning models.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "HARD"
+  },
+  {
+    "id": "q100",
+    "text": "You are using AWS Glue to clean data. You notice that the job is failing with OutOfMemory errors. What is a potential solution?",
+    "options": [
+      "Use a smaller instance type",
+      "Increase the number of workers (DPUs) or use a worker type with more memory (G.1X / G.2X)",
+      "Disable job bookmarks",
+      "Switch to Athena"
+    ],
+    "correctIndex": 1,
+    "explanation": "Increasing the number of workers or using G.2X worker types (which have more memory per worker) can help resolve OOM errors in Glue jobs.",
+    "topics": [
+      "DATA_TRANSFER",
+      "ML_OPS"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q101",
+    "text": "Which metric is commonly used to evaluate the quality of a clustering model (unsupervised)?",
+    "options": [
+      "Silhouette Score",
+      "Accuracy",
+      "F1 Score",
+      "RMSE"
+    ],
+    "correctIndex": 0,
+    "explanation": "The Silhouette Score measures how similar an object is to its own cluster (cohesion) compared to other clusters (separation).",
+    "topics": [
+      "EVAL"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q102",
+    "text": "You are using SageMaker Inference Recommender. What is its primary purpose?",
+    "options": [
+      "To recommend the best algorithm for training",
+      "To recommend the optimal instance type and configuration for model deployment",
+      "To recommend hyperparameters",
+      "To recommend data transformations"
+    ],
+    "correctIndex": 1,
+    "explanation": "SageMaker Inference Recommender helps you select the best instance type and configuration (like instance count, container parameters) for your ML model deployment based on performance and cost.",
+    "topics": [
+      "SAGEMAKER",
+      "SECURITY_COST"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q103",
+    "text": "You have a dataset with a 'Date' column. You want to extract features like 'Day of Week', 'Month', 'Is Weekend'. What is this process called?",
+    "options": [
+      "Feature Scaling",
+      "Feature Extraction / Engineering",
+      "Dimensionality Reduction",
+      "Data Cleaning"
+    ],
+    "correctIndex": 1,
+    "explanation": "Feature Extraction (or Engineering) involves creating new features from existing data to better represent the underlying problem to the predictive models.",
+    "topics": [
+      "EVAL"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q104",
+    "text": "Which AWS service allows you to label data using a private workforce of your own employees?",
+    "options": [
+      "Amazon Mechanical Turk",
+      "SageMaker Ground Truth",
+      "Amazon Augmented AI (A2I)",
+      "Both B and C"
+    ],
+    "correctIndex": 3,
+    "explanation": "Both SageMaker Ground Truth and Amazon A2I support using a Private Workforce (your own employees) for data labeling and human review tasks.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q105",
+    "text": "You are using Amazon Kinesis Data Analytics. Which language can you use to write the application code?",
+    "options": [
+      "SQL",
+      "Java (Apache Flink)",
+      "Python (Apache Flink)",
+      "All of the above"
+    ],
+    "correctIndex": 3,
+    "explanation": "Kinesis Data Analytics supports SQL (legacy) and Apache Flink applications, which can be written in Java, Scala, or Python.",
+    "topics": [
+      "DATA_TRANSFER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q106",
+    "text": "You want to ensure that your SageMaker notebook instance is compliant with your corporate security policy (e.g., no internet access). Which tool can you use to audit this?",
+    "options": [
+      "AWS Config",
+      "AWS CloudTrail",
+      "Amazon Inspector",
+      "Trusted Advisor"
+    ],
+    "correctIndex": 0,
+    "explanation": "AWS Config allows you to assess, audit, and evaluate the configurations of your AWS resources. You can create rules to check if Notebook Instances have direct internet access enabled.",
+    "topics": [
+      "SECURITY_COST"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q107",
+    "text": "Which algorithm is an ensemble learning method that combines multiple weak learners (decision trees) to create a strong learner?",
+    "options": [
+      "Logistic Regression",
+      "XGBoost (Gradient Boosting)",
+      "K-Nearest Neighbors",
+      "Support Vector Machine"
+    ],
+    "correctIndex": 1,
+    "explanation": "XGBoost (Extreme Gradient Boosting) is an ensemble technique that builds models sequentially, with each new model attempting to correct the errors of the previous ones.",
+    "topics": [
+      "XGBOOST"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q108",
+    "text": "You are using SageMaker Canvas. Who is the primary target audience for this tool?",
+    "options": [
+      "Deep Learning Researchers",
+      "MLOps Engineers",
+      "Business Analysts (No-Code users)",
+      "Data Scientists"
+    ],
+    "correctIndex": 2,
+    "explanation": "SageMaker Canvas is a visual, no-code interface designed for business analysts to generate accurate ML predictions without writing code.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q109",
+    "text": "You have a large image dataset in S3. You want to train a model using SageMaker but the dataset is too large to download to the training instance storage. What should you use?",
+    "options": [
+      "File Mode",
+      "Pipe Mode",
+      "Fast File Mode",
+      "EFS"
+    ],
+    "correctIndex": 2,
+    "explanation": "Fast File Mode exposes S3 objects as a file system (FUSE). It allows the application to read files as if they were local, streaming them on demand, without downloading the entire dataset first. (Pipe mode is also valid but Fast File is often easier to use with existing code).",
+    "topics": [
+      "SAGEMAKER",
+      "DATA_TRANSFER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q110",
+    "text": "Which AWS service is best for searching, visualizing, and analyzing log data in real-time?",
+    "options": [
+      "Amazon OpenSearch Service",
+      "Amazon Athena",
+      "Amazon QuickSight",
+      "AWS Glue"
+    ],
+    "correctIndex": 0,
+    "explanation": "Amazon OpenSearch Service (formerly Elasticsearch Service) is widely used for log analytics, full-text search, and application monitoring.",
+    "topics": [
+      "ML_OPS"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q111",
+    "text": "You are using SageMaker Clarify to explain model predictions. Which value does it calculate to show feature contribution?",
+    "options": [
+      "p-value",
+      "SHAP values (Shapley Additive exPlanations)",
+      "Correlation coefficient",
+      "R-squared"
+    ],
+    "correctIndex": 1,
+    "explanation": "SageMaker Clarify uses SHAP values to attribute the contribution of each feature to the final prediction.",
+    "topics": [
+      "SAGEMAKER",
+      "EVAL"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q112",
+    "text": "You want to deploy a model to a SageMaker endpoint but you want to use a custom domain name (e.g., api.example.com). How can you achieve this?",
+    "options": [
+      "Configure Route 53 to point to the SageMaker endpoint URL directly",
+      "Use API Gateway with a custom domain name in front of the SageMaker endpoint",
+      "Use an Application Load Balancer",
+      "SageMaker supports custom domains natively"
+    ],
+    "correctIndex": 1,
+    "explanation": "SageMaker endpoints have an AWS-generated URL. To use a custom domain, you typically put Amazon API Gateway in front of the endpoint and configure the custom domain on API Gateway.",
+    "topics": [
+      "ML_OPS"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q113",
+    "text": "Which activation function is commonly used in the output layer of a binary classification neural network?",
+    "options": [
+      "Softmax",
+      "Sigmoid",
+      "ReLU",
+      "Tanh"
+    ],
+    "correctIndex": 1,
+    "explanation": "Sigmoid outputs a value between 0 and 1, which can be interpreted as a probability for binary classification. (Softmax is for multi-class).",
+    "topics": [
+      "EVAL"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q114",
+    "text": "You are using Amazon Personalize. You want to filter recommendations to exclude items the user has already purchased. What should you use?",
+    "options": [
+      "Personalize Filters",
+      "Lambda post-processing",
+      "Custom Recipe",
+      "Exclusion Rules"
+    ],
+    "correctIndex": 0,
+    "explanation": "Amazon Personalize Filters allow you to apply business rules (like excluding purchased items) to recommendations in real-time or batch.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q115",
+    "text": "You have a dataset with sensitive text. You want to replace names with '[NAME]' and phone numbers with '[PHONE]'. What is this technique called?",
+    "options": [
+      "Encryption",
+      "Tokenization",
+      "Masking / Redaction",
+      "Hashing"
+    ],
+    "correctIndex": 2,
+    "explanation": "Masking or Redaction involves replacing sensitive data with a placeholder or generic tag to protect privacy.",
+    "topics": [
+      "SECURITY_COST"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q116",
+    "text": "Which SageMaker tool allows you to track the lineage of your machine learning artifacts (data -> model -> endpoint)?",
+    "options": [
+      "SageMaker Lineage Tracking",
+      "SageMaker Model Registry",
+      "AWS CloudTrail",
+      "SageMaker Experiments"
+    ],
+    "correctIndex": 0,
+    "explanation": "SageMaker Lineage Tracking creates and stores information about the steps of a machine learning workflow, allowing you to trace the lineage of artifacts.",
+    "topics": [
+      "SAGEMAKER",
+      "ML_OPS"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q117",
+    "text": "You are training a model using the built-in XGBoost algorithm. You want to use a CSV file for training. Does the CSV need a header?",
+    "options": [
+      "Yes, headers are required",
+      "No, headers should NOT be included",
+      "It doesn't matter",
+      "Only for the validation set"
+    ],
+    "correctIndex": 1,
+    "explanation": "For SageMaker built-in XGBoost (and most built-in algos) using CSV, the file should NOT contain a header row. The target variable must be the first column.",
+    "topics": [
+      "SAGEMAKER",
+      "XGBOOST"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q118",
+    "text": "What is the 'Cold Start' problem in recommendation systems?",
+    "options": [
+      "The system takes a long time to boot up",
+      "The system cannot make good recommendations for new users or items with no interaction history",
+      "The model training is slow",
+      "The inference latency is high"
+    ],
+    "correctIndex": 1,
+    "explanation": "Cold Start refers to the difficulty of recommending items to new users (User Cold Start) or recommending new items (Item Cold Start) due to lack of historical data.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q119",
+    "text": "You are using AWS DataSync to transfer data from on-premises to S3. You want to ensure data integrity. How does DataSync handle this?",
+    "options": [
+      "It does not verify integrity",
+      "It calculates checksums for every file transferred and verifies them",
+      "It relies on TCP checksums only",
+      "It uses MD5 hashes"
+    ],
+    "correctIndex": 1,
+    "explanation": "AWS DataSync automatically calculates checksums for source and destination files to verify data integrity during the transfer.",
+    "topics": [
+      "DATA_TRANSFER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q120",
+    "text": "Which AWS service is best for cataloging metadata about your data assets (tables, schemas) across AWS?",
+    "options": [
+      "AWS Glue Data Catalog",
+      "Amazon S3 Inventory",
+      "Amazon DynamoDB",
+      "AWS Service Catalog"
+    ],
+    "correctIndex": 0,
+    "explanation": "AWS Glue Data Catalog is a centralized metadata repository for all your data assets, compatible with Hive Metastore.",
+    "topics": [
+      "DATA_TRANSFER",
+      "ML_OPS"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q121",
+    "text": "You are training a computer vision model. You want to augment your dataset by flipping, rotating, and cropping images. Where is the best place to do this in a SageMaker pipeline?",
+    "options": [
+      "Pre-process all images and save to S3 before training",
+      "Perform on-the-fly augmentation in the training script/data loader",
+      "Use SageMaker Ground Truth",
+      "Use Lambda"
+    ],
+    "correctIndex": 1,
+    "explanation": "On-the-fly augmentation during training (in the data loader) is standard practice. It saves storage space (no need to save augmented copies) and provides infinite variation.",
+    "topics": [
+      "SAGEMAKER",
+      "EVAL"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q122",
+    "text": "Which SageMaker feature allows you to run a training job on a local machine (e.g., your laptop) for debugging purposes?",
+    "options": [
+      "SageMaker Local Mode",
+      "SageMaker Studio Lab",
+      "SageMaker Edge Manager",
+      "You cannot run SageMaker jobs locally"
+    ],
+    "correctIndex": 0,
+    "explanation": "SageMaker Local Mode allows you to run training and inference containers on your local machine (or notebook instance) using the SageMaker Python SDK, which is great for fast debugging.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q123",
+    "text": "You have a time series dataset with strong seasonality. Which technique should you use to make the series stationary?",
+    "options": [
+      "Differencing",
+      "Normalization",
+      "One-Hot Encoding",
+      "Imputation"
+    ],
+    "correctIndex": 0,
+    "explanation": "Differencing (subtracting the current value from the previous value or seasonal lag) is a common technique to remove trend and seasonality to make a time series stationary.",
+    "topics": [
+      "EVAL"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q124",
+    "text": "You are using Amazon Lookout for Equipment. What is its primary use case?",
+    "options": [
+      "Detecting defects in products on a conveyor belt (Visual)",
+      "Detecting abnormal behavior in industrial machinery using sensor data",
+      "Forecasting sales",
+      "Detecting fraud"
+    ],
+    "correctIndex": 1,
+    "explanation": "Amazon Lookout for Equipment analyzes sensor data (vibration, temperature, etc.) from industrial equipment to detect abnormal behavior and predict maintenance needs.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q125",
+    "text": "Which AWS service allows you to build, train, and deploy machine learning models on edge devices?",
+    "options": [
+      "AWS IoT Greengrass (with SageMaker Edge Manager)",
+      "AWS Lambda",
+      "Amazon CloudFront",
+      "AWS Outposts"
+    ],
+    "correctIndex": 0,
+    "explanation": "AWS IoT Greengrass extends cloud capabilities to edge devices. Combined with SageMaker Edge Manager, it allows you to deploy and manage ML models on edge devices.",
+    "topics": [
+      "ML_OPS"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q126",
+    "text": "You are using the Object2Vec algorithm. What kind of data can it learn embeddings for?",
+    "options": [
+      "Only text",
+      "Only images",
+      "Pairs of objects (e.g., user-item, sentence-sentence, product-product)",
+      "Time series"
+    ],
+    "correctIndex": 2,
+    "explanation": "Object2Vec is a general-purpose algorithm that learns low-dimensional dense embeddings for pairs of objects, preserving their semantic relationship.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q127",
+    "text": "You want to use a GPU instance for inference but your model doesn't fully utilize the GPU. You want to run multiple models on the same GPU to save cost. What feature should you use?",
+    "options": [
+      "Multi-Model Endpoints (MME) with GPU support",
+      "Elastic Inference",
+      "SageMaker Serverless Inference",
+      "AWS Batch"
+    ],
+    "correctIndex": 0,
+    "explanation": "SageMaker Multi-Model Endpoints (MME) now support GPUs, allowing you to host multiple models on a single GPU instance and share the resources.",
+    "topics": [
+      "SAGEMAKER",
+      "SECURITY_COST"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q128",
+    "text": "Which metric is best for evaluating a binary classifier when the classes are balanced?",
+    "options": [
+      "Accuracy",
+      "F1 Score",
+      "Recall",
+      "Precision"
+    ],
+    "correctIndex": 0,
+    "explanation": "Accuracy is a good metric when classes are balanced. (If imbalanced, F1 or AUC is better).",
+    "topics": [
+      "EVAL"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q129",
+    "text": "You are using Amazon Kendra. What is it used for?",
+    "options": [
+      "Enterprise Search service powered by ML",
+      "Chatbot building",
+      "Translation",
+      "Transcription"
+    ],
+    "correctIndex": 0,
+    "explanation": "Amazon Kendra is an intelligent enterprise search service that uses machine learning to provide more accurate and relevant search results from unstructured data.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q130",
+    "text": "You want to automate the process of retraining a model when new data arrives, but only if the data passes quality checks. Which tool is best?",
+    "options": [
+      "SageMaker Pipelines",
+      "Cron job",
+      "Manual execution",
+      "AWS Config"
+    ],
+    "correctIndex": 0,
+    "explanation": "SageMaker Pipelines allows you to define a workflow that includes data processing, quality checks (using Processing steps or Quality Check steps), training, and conditional logic.",
+    "topics": [
+      "SAGEMAKER",
+      "ML_OPS"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q131",
+    "text": "You are using the SageMaker Image Classification algorithm. Which input format is supported?",
+    "options": [
+      "RecordIO and Raw Images (JPG/PNG)",
+      "CSV",
+      "Parquet",
+      "JSON"
+    ],
+    "correctIndex": 0,
+    "explanation": "SageMaker Image Classification supports RecordIO (application/x-recordio) and raw images (image/jpeg, image/png) as input.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q132",
+    "text": "You want to ensure that your S3 bucket containing training data is not accidentally deleted. What should you enable?",
+    "options": [
+      "S3 Versioning and MFA Delete",
+      "S3 Encryption",
+      "S3 Lifecycle Policies",
+      "S3 Transfer Acceleration"
+    ],
+    "correctIndex": 0,
+    "explanation": "Enabling Versioning allows recovery of deleted objects. MFA Delete adds an extra layer of security by requiring MFA to delete versions or change the versioning state.",
+    "topics": [
+      "SECURITY_COST"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q133",
+    "text": "Which AWS service is best for streaming real-time video from camera devices to the AWS Cloud for analytics?",
+    "options": [
+      "Amazon Kinesis Video Streams",
+      "Amazon Kinesis Data Streams",
+      "Amazon S3",
+      "AWS Elemental MediaLive"
+    ],
+    "correctIndex": 0,
+    "explanation": "Amazon Kinesis Video Streams makes it easy to securely stream video from connected devices to AWS for analytics, machine learning, and other processing.",
+    "topics": [
+      "DATA_TRANSFER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q134",
+    "text": "You are training a model and the training loss is decreasing but the validation loss is increasing. What is happening?",
+    "options": [
+      "Underfitting",
+      "Overfitting",
+      "Vanishing Gradient",
+      "Optimal training"
+    ],
+    "correctIndex": 1,
+    "explanation": "This is the classic sign of overfitting: the model is memorizing the training data (low training loss) but failing to generalize to unseen data (high validation loss).",
+    "topics": [
+      "EVAL"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q135",
+    "text": "Which SageMaker feature allows you to store and retrieve features for low-latency inference?",
+    "options": [
+      "Feature Store (Online)",
+      "Feature Store (Offline)",
+      "S3",
+      "DynamoDB directly"
+    ],
+    "correctIndex": 0,
+    "explanation": "SageMaker Feature Store Online Store provides low-latency access to the latest feature values for real-time inference.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q136",
+    "text": "You are using AWS Glue to process sensitive data. You want to encrypt the logs written to CloudWatch Logs. What should you do?",
+    "options": [
+      "Configure the Glue Security Configuration to enable CloudWatch Logs encryption with a KMS key",
+      "CloudWatch Logs are encrypted by default and cannot be changed",
+      "Use a VPC Endpoint",
+      "Disable CloudWatch logging"
+    ],
+    "correctIndex": 0,
+    "explanation": "You can create a Glue Security Configuration and specify a KMS key to encrypt CloudWatch Logs generated by Glue jobs.",
+    "topics": [
+      "SECURITY_COST"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q137",
+    "text": "Which algorithm is best for finding groups of similar items in a dataset without labels?",
+    "options": [
+      "K-Means Clustering",
+      "Logistic Regression",
+      "XGBoost",
+      "Linear Learner"
+    ],
+    "correctIndex": 0,
+    "explanation": "K-Means is a popular unsupervised clustering algorithm.",
+    "topics": [
+      "EVAL"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q138",
+    "text": "You are using SageMaker Model Registry. What is the status of a model version that is ready to be deployed to production?",
+    "options": [
+      "PendingManualApproval",
+      "Approved",
+      "Rejected",
+      "Certified"
+    ],
+    "correctIndex": 1,
+    "explanation": "Typically, you transition a model package version to 'Approved' status to indicate it is ready for deployment (often triggering a CI/CD pipeline).",
+    "topics": [
+      "SAGEMAKER",
+      "ML_OPS"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q139",
+    "text": "You want to use a custom loss function in XGBoost. How can you do this?",
+    "options": [
+      "Define a custom objective function (obj)",
+      "It is not possible",
+      "Use the 'eval_metric' parameter",
+      "Modify the source code"
+    ],
+    "correctIndex": 0,
+    "explanation": "XGBoost allows you to define a custom objective function that returns the gradient and hessian of the loss.",
+    "topics": [
+      "XGBOOST"
+    ],
+    "difficulty": "HARD"
+  },
+  {
+    "id": "q140",
+    "text": "Which AWS service is best for batch translation of large volumes of text documents?",
+    "options": [
+      "Amazon Translate",
+      "Amazon Comprehend",
+      "Amazon Polly",
+      "Amazon Textract"
+    ],
+    "correctIndex": 0,
+    "explanation": "Amazon Translate supports batch translation jobs for translating large volumes of text documents stored in S3.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q141",
+    "text": "You are using SageMaker Processing. What is the input/output mechanism?",
+    "options": [
+      "It copies data from S3 to the container (Input) and from container to S3 (Output)",
+      "It streams data via Kinesis",
+      "It reads directly from RDS",
+      "It only supports EFS"
+    ],
+    "correctIndex": 0,
+    "explanation": "SageMaker Processing jobs download input data from S3 to the container's local storage (or via Pipe mode) and upload output data from the container to S3 upon completion.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q142",
+    "text": "Which technique helps to prevent overfitting in Decision Trees?",
+    "options": [
+      "Pruning (limiting depth, min samples leaf)",
+      "Increasing tree depth",
+      "Removing stop words",
+      "Standardization"
+    ],
+    "correctIndex": 0,
+    "explanation": "Pruning restricts the growth of the tree (e.g., max_depth, min_samples_leaf) to prevent it from memorizing the noise in the training data.",
+    "topics": [
+      "EVAL"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q143",
+    "text": "You are using Amazon Fraud Detector. What is a 'Detector'?",
+    "options": [
+      "A container for models and rules logic",
+      "The underlying algorithm",
+      "The training dataset",
+      "The API endpoint"
+    ],
+    "correctIndex": 0,
+    "explanation": "A Detector in Amazon Fraud Detector contains the detection logic, including models and rules, to evaluate events.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q144",
+    "text": "Which AWS service allows you to query data in S3 using natural language questions?",
+    "options": [
+      "Amazon QuickSight Q",
+      "Amazon Athena",
+      "Amazon Kendra",
+      "Amazon Lex"
+    ],
+    "correctIndex": 0,
+    "explanation": "Amazon QuickSight Q allows users to ask questions about their data in natural language and receive answers in the form of visualizations.",
+    "topics": [
+      "ML_OPS"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q145",
+    "text": "You are training a model on EC2 instances. You want to save costs by using Spot Instances. What is the main risk?",
+    "options": [
+      "Instances can be interrupted with 2 minutes notice",
+      "Slower performance",
+      "Lower network bandwidth",
+      "Data corruption"
+    ],
+    "correctIndex": 0,
+    "explanation": "Spot Instances can be reclaimed by AWS with a 2-minute warning if the capacity is needed elsewhere.",
+    "topics": [
+      "SECURITY_COST"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q146",
+    "text": "Which SageMaker built-in algorithm is best for sequence-to-sequence tasks like machine translation or text summarization?",
+    "options": [
+      "Seq2Seq",
+      "BlazingText",
+      "LDA",
+      "Object2Vec"
+    ],
+    "correctIndex": 0,
+    "explanation": "Seq2Seq is a supervised algorithm for sequence-to-sequence learning.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q147",
+    "text": "You have a dataset with a 'City' column containing thousands of unique cities. Using One-Hot Encoding results in too many features. What is a better alternative?",
+    "options": [
+      "Target Encoding (Mean Encoding) or Hashing",
+      "Drop the column",
+      "Use Label Encoding",
+      "Use PCA"
+    ],
+    "correctIndex": 0,
+    "explanation": "Target Encoding replaces the category with the mean of the target variable. Feature Hashing maps categories to a fixed number of buckets. Both are good for high-cardinality categorical features.",
+    "topics": [
+      "EVAL"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q148",
+    "text": "You are using SageMaker Studio. You want to share your notebook with a colleague. What is the easiest way?",
+    "options": [
+      "Share the Snapshot of the notebook",
+      "Download and email the .ipynb file",
+      "Commit to Git",
+      "Copy paste the code"
+    ],
+    "correctIndex": 0,
+    "explanation": "SageMaker Studio allows you to share a snapshot of your notebook (including output) via a URL.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q149",
+    "text": "Which AWS service is best for building a personalized news feed?",
+    "options": [
+      "Amazon Personalize",
+      "Amazon Forecast",
+      "Amazon Kendra",
+      "Amazon Comprehend"
+    ],
+    "correctIndex": 0,
+    "explanation": "Amazon Personalize is a fully managed service for building recommendation systems.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q150",
+    "text": "You are using SageMaker Debugger to profile your training job. What kind of metrics can it capture?",
+    "options": [
+      "System metrics (CPU/GPU usage) and Framework metrics (Step duration)",
+      "Only loss values",
+      "Only accuracy",
+      "Only cost"
+    ],
+    "correctIndex": 0,
+    "explanation": "SageMaker Debugger Profiler captures system resource usage (CPU, GPU, Memory, I/O) and framework-level metrics to help identify bottlenecks.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q151",
+    "text": "Which algorithm is suitable for market basket analysis (finding associations between items)?",
+    "options": [
+      "Apriori or Association Rules",
+      "K-Means",
+      "Linear Regression",
+      "PCA"
+    ],
+    "correctIndex": 0,
+    "explanation": "Apriori is a classic algorithm for learning association rules (e.g., people who buy bread also buy butter).",
+    "topics": [
+      "EVAL"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q152",
+    "text": "You want to deploy a model to a serverless endpoint that automatically scales down to zero when not in use. Which option should you choose?",
+    "options": [
+      "SageMaker Serverless Inference",
+      "Real-time Inference",
+      "Asynchronous Inference",
+      "Batch Transform"
+    ],
+    "correctIndex": 0,
+    "explanation": "SageMaker Serverless Inference is ideal for workloads with intermittent traffic. It automatically scales compute capacity based on traffic and scales down to zero when idle.",
+    "topics": [
+      "SAGEMAKER",
+      "SECURITY_COST"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q153",
+    "text": "You are using AWS Glue. What is a 'DynamicFrame'?",
+    "options": [
+      "A distributed data collection similar to a Spark DataFrame but with self-describing schema",
+      "A video frame",
+      "A database table",
+      "A visualization"
+    ],
+    "correctIndex": 0,
+    "explanation": "DynamicFrame is the primary data structure in AWS Glue scripts. It is an extension of Spark DataFrame that supports data with inconsistent or changing schemas.",
+    "topics": [
+      "DATA_TRANSFER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q154",
+    "text": "Which metric is used to evaluate the performance of an Object Detection model?",
+    "options": [
+      "mAP (mean Average Precision)",
+      "MSE",
+      "Accuracy",
+      "Log Loss"
+    ],
+    "correctIndex": 0,
+    "explanation": "mAP (mean Average Precision) is the standard metric for object detection, considering both the classification accuracy and the bounding box overlap (IoU).",
+    "topics": [
+      "EVAL"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q155",
+    "text": "You need to process data in S3 that is encrypted with a customer-managed KMS key using SageMaker Processing. What permission does the Processing Role need?",
+    "options": [
+      "kms:Decrypt and kms:GenerateDataKey on the KMS key",
+      "s3:GetObject only",
+      "iam:PassRole",
+      "No special permissions"
+    ],
+    "correctIndex": 0,
+    "explanation": "The IAM role used by the processing job needs permissions to decrypt the input data and encrypt the output data using the specified KMS key.",
+    "topics": [
+      "SECURITY_COST"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q156",
+    "text": "You are using Amazon SageMaker Feature Store. You want to ensure that features are available for training models offline. Which store should you use?",
+    "options": [
+      "Offline Store",
+      "Online Store",
+      "Both",
+      "S3 directly"
+    ],
+    "correctIndex": 0,
+    "explanation": "The Offline Store (backed by S3) is used for storing historical feature data for training and batch inference.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q157",
+    "text": "Which AWS service is best for building a search application that understands the context of the query?",
+    "options": [
+      "Amazon Kendra",
+      "Amazon OpenSearch Service",
+      "Amazon RDS",
+      "Amazon S3"
+    ],
+    "correctIndex": 0,
+    "explanation": "Amazon Kendra uses machine learning to understand the context of questions and return precise answers, not just keyword matches.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q158",
+    "text": "You are using SageMaker Autopilot. You want to see the code that was used to generate the models. Is this possible?",
+    "options": [
+      "Yes, Autopilot generates notebooks (Data Exploration and Candidate Definition) that you can view and modify",
+      "No, Autopilot is a black box",
+      "Only for the best model",
+      "Only if you use the API"
+    ],
+    "correctIndex": 0,
+    "explanation": "SageMaker Autopilot generates two notebooks: a Data Exploration notebook and a Candidate Definition notebook, which gives you full visibility and control over the process.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q159",
+    "text": "Which technique is used to handle outliers in a dataset?",
+    "options": [
+      "Winsorization or Trimming",
+      "Normalization",
+      "One-Hot Encoding",
+      "Oversampling"
+    ],
+    "correctIndex": 0,
+    "explanation": "Winsorization (capping extreme values) or Trimming (removing them) are common techniques for handling outliers.",
+    "topics": [
+      "EVAL"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q160",
+    "text": "You are using Amazon Rekognition Video. You want to track the path of people in a video. Which feature should you use?",
+    "options": [
+      "Person Pathing / Face Search",
+      "Label Detection",
+      "Text Detection",
+      "Celebrity Recognition"
+    ],
+    "correctIndex": 0,
+    "explanation": "Rekognition Video can track people and faces in a video, providing their location (bounding box) and timestamp.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q161",
+    "text": "You are using SageMaker Distributed Model Parallel. What is its main benefit?",
+    "options": [
+      "It splits the model across multiple GPUs/instances to train models that are larger than the memory of a single GPU",
+      "It splits the data",
+      "It speeds up hyperparameter tuning",
+      "It reduces cost"
+    ],
+    "correctIndex": 0,
+    "explanation": "Model Parallelism splits the model graph across devices, allowing you to train massive models (like LLMs) that don't fit in a single GPU's memory.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q162",
+    "text": "Which AWS service allows you to create a private connection between your VPC and supported AWS services without using an Internet Gateway?",
+    "options": [
+      "AWS PrivateLink (VPC Endpoints)",
+      "AWS Direct Connect",
+      "AWS VPN",
+      "AWS Transit Gateway"
+    ],
+    "correctIndex": 0,
+    "explanation": "AWS PrivateLink provides private connectivity between VPCs, AWS services, and your on-premises networks, without exposing your traffic to the public internet.",
+    "topics": [
+      "SECURITY_COST"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q163",
+    "text": "You are using SageMaker Clarify. You want to check for bias in your dataset before training. What is this called?",
+    "options": [
+      "Pre-training Bias",
+      "Post-training Bias",
+      "Model Explainability",
+      "Drift Detection"
+    ],
+    "correctIndex": 0,
+    "explanation": "Pre-training bias analysis looks for statistical bias in the dataset itself (e.g., class imbalance, difference in proportions) before a model is trained.",
+    "topics": [
+      "SAGEMAKER",
+      "EVAL"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q164",
+    "text": "Which algorithm is a probabilistic classifier based on applying Bayes' theorem?",
+    "options": [
+      "Naive Bayes",
+      "Logistic Regression",
+      "SVM",
+      "Random Forest"
+    ],
+    "correctIndex": 0,
+    "explanation": "Naive Bayes is a family of probabilistic algorithms based on Bayes' theorem with the 'naive' assumption of conditional independence between every pair of features.",
+    "topics": [
+      "EVAL"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q165",
+    "text": "You are using Amazon Lookout for Metrics. What does it do?",
+    "options": [
+      "Automatically detects anomalies in time series metrics (e.g., revenue drops)",
+      "Visualizes metrics",
+      "Stores metrics",
+      "Trains models"
+    ],
+    "correctIndex": 0,
+    "explanation": "Amazon Lookout for Metrics uses ML to automatically detect and diagnose anomalies (outliers) in business and operational time series data.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q166",
+    "text": "You want to run a SageMaker training job using a custom algorithm written in R. What do you need to do?",
+    "options": [
+      "Create a Docker image with R and your code, push to ECR, and use it in SageMaker",
+      "SageMaker does not support R",
+      "Use the built-in R algorithm",
+      "Convert the code to Python"
+    ],
+    "correctIndex": 0,
+    "explanation": "SageMaker supports any language or framework via custom Docker containers. You need to package your R environment and code into a Docker image.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q167",
+    "text": "Which AWS service is best for collecting, processing, and analyzing real-time, streaming data so you can get timely insights and react quickly to new information?",
+    "options": [
+      "Amazon Kinesis",
+      "Amazon S3",
+      "Amazon Glacier",
+      "AWS Batch"
+    ],
+    "correctIndex": 0,
+    "explanation": "Amazon Kinesis is the platform for streaming data on AWS.",
+    "topics": [
+      "DATA_TRANSFER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q168",
+    "text": "You are using SageMaker Model Monitor. You want to visualize the statistics of the captured data. Which file format does Model Monitor use to store statistics?",
+    "options": [
+      "JSON",
+      "CSV",
+      "Parquet",
+      "XML"
+    ],
+    "correctIndex": 0,
+    "explanation": "SageMaker Model Monitor stores the calculated statistics (constraints and statistics) in JSON format in S3.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q169",
+    "text": "Which technique is used to reduce the size of a model after training with minimal loss in accuracy?",
+    "options": [
+      "Pruning and Quantization",
+      "Dropout",
+      "Regularization",
+      "Augmentation"
+    ],
+    "correctIndex": 0,
+    "explanation": "Pruning removes unnecessary connections (weights), and Quantization reduces the precision of the weights (e.g., float32 to int8), both reducing model size.",
+    "topics": [
+      "ML_OPS"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q170",
+    "text": "You are using Amazon Comprehend Medical. What is its specific capability?",
+    "options": [
+      "Extracting medical information (medication, diagnosis, PHI) from unstructured text",
+      "Diagnosing diseases",
+      "Prescribing medicine",
+      "Scheduling appointments"
+    ],
+    "correctIndex": 0,
+    "explanation": "Amazon Comprehend Medical is a HIPAA-eligible NLP service that extracts health data from medical text.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q171",
+    "text": "You are using SageMaker Pipelines. You want to pass the output of a ProcessingStep to a TrainingStep. How do you do this?",
+    "options": [
+      "Use the `properties` of the ProcessingStep output as the input for the TrainingStep",
+      "Hardcode the S3 path",
+      "Use a Lambda function",
+      "It happens automatically"
+    ],
+    "correctIndex": 0,
+    "explanation": "In SageMaker Pipelines, you chain steps by passing the output property of one step (e.g., `step_process.properties.ProcessingOutputConfig.Outputs['train'].S3Output.S3Uri`) as the input to the next.",
+    "topics": [
+      "SAGEMAKER",
+      "ML_OPS"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q172",
+    "text": "Which AWS service is best for building a content moderation system for user-generated images?",
+    "options": [
+      "Amazon Rekognition (Content Moderation)",
+      "Amazon Comprehend",
+      "Amazon Macie",
+      "Amazon Inspector"
+    ],
+    "correctIndex": 0,
+    "explanation": "Amazon Rekognition has a Content Moderation feature that detects unsafe, inappropriate, or unwanted content in images and videos.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q173",
+    "text": "You are using SageMaker Asynchronous Inference. Where are the request payloads stored?",
+    "options": [
+      "In Amazon S3",
+      "In the HTTP body",
+      "In DynamoDB",
+      "In Memory"
+    ],
+    "correctIndex": 0,
+    "explanation": "For Asynchronous Inference, you upload the input payload to S3 and pass the S3 URI in the request. The endpoint downloads it, processes it, and uploads the result to S3.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q174",
+    "text": "Which metric is best for evaluating a regression model when outliers are present and you don't want them to skew the result?",
+    "options": [
+      "MAE (Mean Absolute Error)",
+      "MSE",
+      "RMSE",
+      "R-Squared"
+    ],
+    "correctIndex": 0,
+    "explanation": "MAE takes the absolute difference. Unlike MSE/RMSE which square the error (amplifying outliers), MAE is more robust to outliers.",
+    "topics": [
+      "EVAL"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q175",
+    "text": "You are using AWS Glue DataBrew. What is it used for?",
+    "options": [
+      "Visual data preparation tool for cleaning and normalizing data",
+      "Writing Spark code",
+      "Orchestrating workflows",
+      "Streaming analytics"
+    ],
+    "correctIndex": 0,
+    "explanation": "AWS Glue DataBrew is a visual data preparation tool that allows data analysts and data scientists to clean and normalize data without writing code.",
+    "topics": [
+      "DATA_TRANSFER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q176",
+    "text": "You want to use a specific version of a TensorFlow framework in SageMaker. How do you specify this?",
+    "options": [
+      "Use the `framework_version` parameter in the TensorFlow estimator",
+      "You can only use the latest version",
+      "Install it in the requirements.txt",
+      "Use a custom container"
+    ],
+    "correctIndex": 0,
+    "explanation": "When using the SageMaker Python SDK's framework estimators (like TensorFlow, PyTorch), you specify the desired version using the `framework_version` parameter.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q177",
+    "text": "Which AWS service is best for converting a large library of documents into a searchable index?",
+    "options": [
+      "Amazon Kendra",
+      "Amazon Textract",
+      "Amazon Polly",
+      "Amazon Translate"
+    ],
+    "correctIndex": 0,
+    "explanation": "Amazon Kendra is an intelligent search service that indexes documents and provides search capabilities.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q178",
+    "text": "You are using SageMaker Model Monitor. You want to receive an alert if the data drift exceeds a threshold. What should you use?",
+    "options": [
+      "CloudWatch Alarms",
+      "SNS directly",
+      "Lambda",
+      "Email"
+    ],
+    "correctIndex": 0,
+    "explanation": "SageMaker Model Monitor emits metrics to CloudWatch. You can set up CloudWatch Alarms to trigger when these metrics exceed a threshold.",
+    "topics": [
+      "SAGEMAKER",
+      "ML_OPS"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q179",
+    "text": "Which technique is used to address the 'Vanishing Gradient' problem in deep networks?",
+    "options": [
+      "ReLU activation, Batch Normalization, Residual Connections (ResNet)",
+      "Sigmoid activation",
+      "Increasing depth",
+      "Zero initialization"
+    ],
+    "correctIndex": 0,
+    "explanation": "ReLU (non-saturating), Batch Normalization (stabilizes inputs), and Residual Connections (skip connections) are standard techniques to mitigate vanishing gradients.",
+    "topics": [
+      "EVAL"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q180",
+    "text": "You are using Amazon Monitron. What is it used for?",
+    "options": [
+      "End-to-end system for industrial equipment monitoring (sensors + gateway + service)",
+      "Monitoring software logs",
+      "Monitoring website uptime",
+      "Monitoring AWS costs"
+    ],
+    "correctIndex": 0,
+    "explanation": "Amazon Monitron is an end-to-end system that includes sensors, a gateway, and a service to monitor industrial equipment for predictive maintenance.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q181",
+    "text": "You are using SageMaker Data Wrangler. You want to identify if there is any target leakage in your dataset. Which analysis type should you use?",
+    "options": [
+      "Target Leakage Analysis",
+      "Bias Report",
+      "Histogram",
+      "Scatter Plot"
+    ],
+    "correctIndex": 0,
+    "explanation": "SageMaker Data Wrangler provides a built-in 'Target Leakage' analysis that helps identify features that are strongly correlated with the target but might not be available at inference time.",
+    "topics": [
+      "SAGEMAKER",
+      "EVAL"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q182",
+    "text": "Which AWS service is best for building a text-to-speech application with lifelike voices?",
+    "options": [
+      "Amazon Polly",
+      "Amazon Transcribe",
+      "Amazon Lex",
+      "Amazon Connect"
+    ],
+    "correctIndex": 0,
+    "explanation": "Amazon Polly is a service that turns text into lifelike speech.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q183",
+    "text": "You are using SageMaker Autopilot. You want to optimize the model for a specific metric (e.g., F1 score). How do you specify this?",
+    "options": [
+      "Set the 'Objective Metric' in the CreateAutoMLJob API or console",
+      "You cannot change the metric",
+      "It is automatically selected",
+      "Write a custom loss function"
+    ],
+    "correctIndex": 0,
+    "explanation": "You can specify the objective metric (e.g., Accuracy, F1, AUC, MSE) that Autopilot should optimize for during the model creation process.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q184",
+    "text": "Which technique is used to reduce the variance of a model (prevent overfitting)?",
+    "options": [
+      "Bagging (Bootstrap Aggregating)",
+      "Boosting",
+      "Increasing model complexity",
+      "Removing regularization"
+    ],
+    "correctIndex": 0,
+    "explanation": "Bagging (e.g., Random Forest) reduces variance by averaging multiple models trained on different subsets of data. (Boosting primarily reduces bias).",
+    "topics": [
+      "EVAL"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q185",
+    "text": "You are using Amazon Rekognition Custom Labels. What do you need to provide to train the model?",
+    "options": [
+      "A labeled dataset of images with the objects/scenes you want to detect",
+      "A pre-trained model",
+      "Python code",
+      "A GPU instance"
+    ],
+    "correctIndex": 0,
+    "explanation": "To train a Custom Labels model, you simply provide a labeled dataset of images. Rekognition handles the training and hosting.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q186",
+    "text": "You are using SageMaker Pipelines. You want to execute a step only if a previous step succeeded. How is this handled?",
+    "options": [
+      "SageMaker Pipelines automatically handles dependencies (DAG)",
+      "You must use a ConditionStep",
+      "You must use Lambda",
+      "You must use Step Functions"
+    ],
+    "correctIndex": 0,
+    "explanation": "SageMaker Pipelines infers the dependency graph (DAG) based on the data inputs/outputs. If Step B needs the output of Step A, it waits for Step A to complete successfully.",
+    "topics": [
+      "SAGEMAKER",
+      "ML_OPS"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q187",
+    "text": "Which AWS service allows you to run Apache Flink applications for processing streaming data?",
+    "options": [
+      "Amazon Kinesis Data Analytics (Managed Service for Apache Flink)",
+      "Amazon EMR",
+      "AWS Glue",
+      "Amazon Athena"
+    ],
+    "correctIndex": 0,
+    "explanation": "Amazon Kinesis Data Analytics provides a managed environment for running Apache Flink applications.",
+    "topics": [
+      "DATA_TRANSFER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q188",
+    "text": "You are using SageMaker JumpStart. What does it provide?",
+    "options": [
+      "A collection of pre-trained models and solution templates",
+      "A way to jumpstart your car",
+      "A faster way to launch instances",
+      "A networking tool"
+    ],
+    "correctIndex": 0,
+    "explanation": "SageMaker JumpStart provides a hub of pre-trained models (from TensorFlow, PyTorch, Hugging Face) and end-to-end solution templates for common ML use cases.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q189",
+    "text": "Which algorithm is best for binary classification when the relationship between features and log-odds is linear?",
+    "options": [
+      "Logistic Regression",
+      "Linear Regression",
+      "K-Means",
+      "PCA"
+    ],
+    "correctIndex": 0,
+    "explanation": "Logistic Regression is a linear classifier that models the probability of a binary outcome.",
+    "topics": [
+      "EVAL"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q190",
+    "text": "You are using Amazon HealthLake. What standard does it use to store health data?",
+    "options": [
+      "FHIR (Fast Healthcare Interoperability Resources)",
+      "HL7 v2",
+      "DICOM",
+      "JSON"
+    ],
+    "correctIndex": 0,
+    "explanation": "Amazon HealthLake is a HIPAA-eligible service that stores health data in the FHIR (Fast Healthcare Interoperability Resources) format.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q191",
+    "text": "You want to use a specific version of Python (e.g., 3.9) in your SageMaker training job. How do you specify this?",
+    "options": [
+      "Use the `py_version` parameter in the estimator",
+      "Install it in the entrypoint script",
+      "You cannot change the Python version",
+      "Use a lifecycle config"
+    ],
+    "correctIndex": 0,
+    "explanation": "When using SageMaker Framework estimators, you can specify `py_version='py39'` (depending on supported versions) to select the Python version.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q192",
+    "text": "Which AWS service is best for building a fraud detection graph to detect rings of fraudsters?",
+    "options": [
+      "Amazon Neptune",
+      "Amazon RDS",
+      "Amazon DynamoDB",
+      "Amazon Redshift"
+    ],
+    "correctIndex": 0,
+    "explanation": "Amazon Neptune is a graph database service. Graph databases are ideal for detecting relationships and patterns like fraud rings.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q193",
+    "text": "You are using SageMaker Model Monitor. You want to monitor the quality of the model predictions (e.g., accuracy) by comparing them with ground truth labels that arrive later. What should you use?",
+    "options": [
+      "Model Quality Monitor",
+      "Data Quality Monitor",
+      "Bias Drift Monitor",
+      "Feature Attribution Monitor"
+    ],
+    "correctIndex": 0,
+    "explanation": "Model Quality Monitor compares the model predictions with actual ground truth labels (ingested via S3) to calculate metrics like accuracy, precision, recall, etc.",
+    "topics": [
+      "SAGEMAKER",
+      "ML_OPS"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q194",
+    "text": "Which technique is used to handle categorical features with high cardinality (many unique values)?",
+    "options": [
+      "Feature Hashing (Hashing Trick)",
+      "One-Hot Encoding",
+      "Label Encoding",
+      "Binning"
+    ],
+    "correctIndex": 0,
+    "explanation": "Feature Hashing maps high-cardinality features to a fixed-size vector, avoiding the explosion of dimensions that One-Hot Encoding would cause.",
+    "topics": [
+      "EVAL"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q195",
+    "text": "You are using Amazon Forecast. Which algorithm is best for sparse datasets where many items have little history?",
+    "options": [
+      "CNN-QR",
+      "DeepAR+",
+      "Prophet",
+      "NPTS"
+    ],
+    "correctIndex": 1,
+    "explanation": "DeepAR+ is a recurrent neural network algorithm that learns from all time series in the dataset, allowing it to make forecasts for items with little history by learning from similar items (Cold Start).",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "HARD"
+  },
+  {
+    "id": "q196",
+    "text": "You want to ensure that your SageMaker training data in S3 is encrypted in transit. What should you do?",
+    "options": [
+      "Use an S3 Bucket Policy with `aws:SecureTransport` condition",
+      "Enable SSE-S3",
+      "Use a VPC Endpoint",
+      "Use a VPN"
+    ],
+    "correctIndex": 0,
+    "explanation": "To enforce encryption in transit (HTTPS), you can attach a bucket policy that denies requests that do not use SSL (`aws:SecureTransport`: false).",
+    "topics": [
+      "SECURITY_COST"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q197",
+    "text": "Which SageMaker feature allows you to manage the approval status of model versions?",
+    "options": [
+      "SageMaker Model Registry",
+      "SageMaker Projects",
+      "SageMaker Experiments",
+      "SageMaker Pipelines"
+    ],
+    "correctIndex": 0,
+    "explanation": "SageMaker Model Registry provides a central repository to manage model versions and their approval status (Pending, Approved, Rejected).",
+    "topics": [
+      "SAGEMAKER",
+      "ML_OPS"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q198",
+    "text": "You are using AWS Glue. You want to run a job on a schedule (e.g., every night at 1 AM). What should you use?",
+    "options": [
+      "Glue Trigger (Schedule)",
+      "Cron on EC2",
+      "Lambda",
+      "Step Functions"
+    ],
+    "correctIndex": 0,
+    "explanation": "AWS Glue Triggers can be set to 'Schedule' type using cron expressions to run jobs at specific times.",
+    "topics": [
+      "DATA_TRANSFER",
+      "ML_OPS"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q199",
+    "text": "Which algorithm is best for detecting anomalies in a multi-dimensional dataset?",
+    "options": [
+      "Random Cut Forest (RCF)",
+      "Linear Regression",
+      "XGBoost",
+      "ARIMA"
+    ],
+    "correctIndex": 0,
+    "explanation": "Random Cut Forest is designed for anomaly detection in multi-dimensional data.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q200",
+    "text": "You are using SageMaker Studio. You want to install a custom Python package in the kernel so it persists across sessions. How can you do this?",
+    "options": [
+      "Create a custom Lifecycle Configuration script that installs the package",
+      "Run `!pip install` every time",
+      "You cannot install custom packages",
+      "Use a custom image"
+    ],
+    "correctIndex": 0,
+    "explanation": "A Lifecycle Configuration script can be attached to the Studio Domain or User Profile to run on startup (KernelGateway app) and install packages.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q201",
+    "text": "Which AWS service is best for extracting key-value pairs from scanned receipts?",
+    "options": [
+      "Amazon Textract",
+      "Amazon Comprehend",
+      "Amazon Rekognition",
+      "Amazon Translate"
+    ],
+    "correctIndex": 0,
+    "explanation": "Amazon Textract has a specialized API (AnalyzeExpense) for extracting data from invoices and receipts.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q202",
+    "text": "You are using SageMaker Training Compiler. What is its benefit?",
+    "options": [
+      "Accelerates deep learning model training by compiling the computation graph",
+      "Compiles Python code to C++",
+      "Reduces inference latency",
+      "Reduces data size"
+    ],
+    "correctIndex": 0,
+    "explanation": "SageMaker Training Compiler optimizes DL models (Hugging Face, PyTorch, TensorFlow) by compiling the graph to the hardware, reducing training time by up to 50%.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q203",
+    "text": "Which metric is best for evaluating a ranking model (e.g., search results)?",
+    "options": [
+      "NDCG (Normalized Discounted Cumulative Gain)",
+      "Accuracy",
+      "MSE",
+      "F1 Score"
+    ],
+    "correctIndex": 0,
+    "explanation": "NDCG is a popular metric for information retrieval and ranking, as it accounts for the position of relevant items in the list.",
+    "topics": [
+      "EVAL"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q204",
+    "text": "You are using Amazon Personalize. You want to recommend items to a user based on their current session (real-time intent). Which recipe should you use?",
+    "options": [
+      "aws-user-personalization",
+      "aws-sims",
+      "aws-popularity-count",
+      "aws-next-best-action"
+    ],
+    "correctIndex": 0,
+    "explanation": "The `aws-user-personalization` recipe is designed to provide personalized recommendations that update in real-time based on the user's interactions in the current session.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q205",
+    "text": "You want to use a custom Docker container for SageMaker training. What is the required directory structure for input data?",
+    "options": [
+      "/opt/ml/input/data/{channel_name}",
+      "/data",
+      "/input",
+      "/tmp"
+    ],
+    "correctIndex": 0,
+    "explanation": "SageMaker mounts input data from S3 to `/opt/ml/input/data/{channel_name}` inside the container.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q206",
+    "text": "Which AWS service is best for building a voice-controlled virtual assistant?",
+    "options": [
+      "Amazon Lex",
+      "Amazon Polly",
+      "Amazon Transcribe",
+      "Amazon Connect"
+    ],
+    "correctIndex": 0,
+    "explanation": "Amazon Lex provides the ASR (Speech to Text) and NLU (Natural Language Understanding) capabilities needed to build conversational bots.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q207",
+    "text": "You are using SageMaker Feature Store. You want to ingest data from a Kinesis Data Stream into the Feature Store. How can you do this?",
+    "options": [
+      "Use a Lambda function or Kinesis Data Analytics to write to the Feature Store API (PutRecord)",
+      "Direct integration",
+      "Use Glue",
+      "Use S3"
+    ],
+    "correctIndex": 0,
+    "explanation": "You typically use a consumer (like Lambda or Kinesis Data Analytics) to read from the stream and call the `PutRecord` API of the Feature Store.",
+    "topics": [
+      "SAGEMAKER",
+      "DATA_TRANSFER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q208",
+    "text": "Which technique is used to explain the output of a black-box model by approximating it with a simpler, interpretable model locally?",
+    "options": [
+      "LIME (Local Interpretable Model-agnostic Explanations)",
+      "SHAP",
+      "Partial Dependence Plots",
+      "Global Surrogate"
+    ],
+    "correctIndex": 0,
+    "explanation": "LIME explains the predictions of any classifier by learning an interpretable model locally around the prediction.",
+    "topics": [
+      "EVAL"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q209",
+    "text": "You are using Amazon Lookout for Vision. What is it used for?",
+    "options": [
+      "Detecting visual defects in industrial products (e.g., scratches, dents)",
+      "Face recognition",
+      "Text extraction",
+      "Video analysis"
+    ],
+    "correctIndex": 0,
+    "explanation": "Amazon Lookout for Vision is a service that uses computer vision to spot defects in manufactured products at scale.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q210",
+    "text": "You want to run a hyperparameter tuning job. Which search strategy is generally more efficient than Grid Search?",
+    "options": [
+      "Bayesian Optimization",
+      "Random Search",
+      "Manual Search",
+      "Linear Search"
+    ],
+    "correctIndex": 0,
+    "explanation": "Bayesian Optimization treats the tuning as a regression problem, learning from previous evaluations to choose the next set of hyperparameters, making it more efficient than Grid or Random search.",
+    "topics": [
+      "SAGEMAKER",
+      "EVAL"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q211",
+    "text": "Which AWS service is best for running a large-scale simulation (e.g., Monte Carlo) using thousands of EC2 instances?",
+    "options": [
+      "AWS Batch",
+      "AWS Lambda",
+      "SageMaker",
+      "Amazon Lightsail"
+    ],
+    "correctIndex": 0,
+    "explanation": "AWS Batch is designed for batch computing. It provisions and manages the compute resources for large-scale parallel jobs.",
+    "topics": [
+      "ML_OPS"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q212",
+    "text": "You are using SageMaker Clarify. You want to detect bias in a model that is already deployed. What kind of bias is this?",
+    "options": [
+      "Post-training Bias",
+      "Pre-training Bias",
+      "Selection Bias",
+      "Sampling Bias"
+    ],
+    "correctIndex": 0,
+    "explanation": "Post-training bias analysis evaluates the model predictions for bias (e.g., DPPL, DI) after the model has been trained.",
+    "topics": [
+      "SAGEMAKER",
+      "EVAL"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q213",
+    "text": "Which algorithm is best for forecasting a time series where the data has multiple seasonalities (e.g., daily, weekly)?",
+    "options": [
+      "Prophet",
+      "ARIMA",
+      "ETS",
+      "Linear Regression"
+    ],
+    "correctIndex": 0,
+    "explanation": "Prophet is designed to handle time series with strong seasonal effects and several seasons of historical data.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q214",
+    "text": "You are using Amazon Rekognition. You want to compare a face in an image with a face in a stored collection. Which API should you use?",
+    "options": [
+      "SearchFacesByImage",
+      "DetectFaces",
+      "CompareFaces",
+      "IndexFaces"
+    ],
+    "correctIndex": 0,
+    "explanation": "SearchFacesByImage searches for the largest face in the input image in the specified face collection.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q215",
+    "text": "You are using SageMaker Edge Manager. What is a 'Device Fleet'?",
+    "options": [
+      "A logical grouping of devices that you want to manage together",
+      "A collection of EC2 instances",
+      "A collection of models",
+      "A collection of S3 buckets"
+    ],
+    "correctIndex": 0,
+    "explanation": "A Device Fleet in SageMaker Edge Manager is a group of edge devices that you manage as a single unit.",
+    "topics": [
+      "ML_OPS"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q216",
+    "text": "Which AWS service allows you to create a secure data clean room for collaborating with partners without sharing raw data?",
+    "options": [
+      "AWS Clean Rooms",
+      "AWS Glue",
+      "Amazon S3",
+      "SageMaker"
+    ],
+    "correctIndex": 0,
+    "explanation": "AWS Clean Rooms helps you collaborate with your partners to analyze your collective datasets without sharing or revealing your underlying data.",
+    "topics": [
+      "SECURITY_COST"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q217",
+    "text": "You are using SageMaker Inference Recommender. What is the 'Default' job type?",
+    "options": [
+      "It runs a quick benchmark on a few recommended instance types",
+      "It runs a comprehensive load test",
+      "It trains the model",
+      "It deploys the model"
+    ],
+    "correctIndex": 0,
+    "explanation": "The Default job type in Inference Recommender provides recommendations in less than an hour by running benchmarks on a curated list of instance types.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q218",
+    "text": "Which metric is best for evaluating a multi-class classification model?",
+    "options": [
+      "Confusion Matrix (and derived metrics like Macro/Micro F1)",
+      "RMSE",
+      "MAE",
+      "AUC (Binary)"
+    ],
+    "correctIndex": 0,
+    "explanation": "A Confusion Matrix gives a full breakdown of correct and incorrect predictions for each class. Macro/Micro averaged F1 scores are commonly used for summary.",
+    "topics": [
+      "EVAL"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q219",
+    "text": "You are using Amazon Transcribe. You want to identify who is speaking in the audio (Speaker Diarization). Is this supported?",
+    "options": [
+      "Yes, Transcribe supports Speaker Diarization",
+      "No",
+      "Only for 2 speakers",
+      "Only in English"
+    ],
+    "correctIndex": 0,
+    "explanation": "Amazon Transcribe supports Speaker Diarization, which identifies different speakers in the audio and labels their speech segments.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q220",
+    "text": "You are using SageMaker Canvas. Can you export the models created in Canvas to SageMaker Studio?",
+    "options": [
+      "Yes, you can share the model with Studio for further analysis or deployment",
+      "No, Canvas is isolated",
+      "Only via S3",
+      "Only via email"
+    ],
+    "correctIndex": 0,
+    "explanation": "SageMaker Canvas integrates with SageMaker Studio. You can share models created in Canvas with data scientists in Studio.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q221",
+    "text": "Which AWS service is best for building a knowledge graph from unstructured text?",
+    "options": [
+      "Amazon Comprehend",
+      "Amazon Neptune",
+      "Amazon Textract",
+      "Amazon Kendra"
+    ],
+    "correctIndex": 0,
+    "explanation": "Amazon Comprehend can extract entities and relationships from text, which can then be used to populate a knowledge graph (like Neptune).",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q222",
+    "text": "You are using SageMaker Training. You want to use the 'Spot' capacity but you are worried about the job taking too long due to interruptions. What can you define to limit the total duration?",
+    "options": [
+      "MaxWaitTimeInSeconds",
+      "MaxRuntimeInSeconds",
+      "MaxRetryAttempts",
+      "MaxSpotInterruption"
+    ],
+    "correctIndex": 0,
+    "explanation": "MaxWaitTimeInSeconds specifies the maximum time the job can wait for Spot capacity plus the maximum runtime. It must be greater than MaxRuntimeInSeconds.",
+    "topics": [
+      "SECURITY_COST"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q223",
+    "text": "Which algorithm is best for dimensionality reduction in a linear way?",
+    "options": [
+      "PCA (Principal Component Analysis)",
+      "t-SNE",
+      "Autoencoder",
+      "K-Means"
+    ],
+    "correctIndex": 0,
+    "explanation": "PCA is a linear dimensionality reduction technique.",
+    "topics": [
+      "EVAL"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q224",
+    "text": "You are using Amazon Personalize. What is an 'Event Tracker'?",
+    "options": [
+      "A mechanism to record real-time user interactions and send them to Personalize",
+      "A tool to track costs",
+      "A tool to track model training",
+      "A tool to track S3 events"
+    ],
+    "correctIndex": 0,
+    "explanation": "An Event Tracker in Personalize provides a tracking ID that you use to send real-time user events (clicks, views) to the service.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q225",
+    "text": "You are using SageMaker Pipelines. Which step type allows you to run a generic Python script?",
+    "options": [
+      "ProcessingStep",
+      "TrainingStep",
+      "TransformStep",
+      "CallbackStep"
+    ],
+    "correctIndex": 0,
+    "explanation": "ProcessingStep runs a SageMaker Processing Job, which allows you to run any Python script (or other code) in a container.",
+    "topics": [
+      "SAGEMAKER",
+      "ML_OPS"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q226",
+    "text": "Which AWS service is best for detecting anomalies in business metrics like daily revenue?",
+    "options": [
+      "Amazon Lookout for Metrics",
+      "Amazon CloudWatch Anomaly Detection",
+      "Amazon Fraud Detector",
+      "SageMaker Random Cut Forest"
+    ],
+    "correctIndex": 0,
+    "explanation": "Amazon Lookout for Metrics is specifically designed for business metrics anomaly detection.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q227",
+    "text": "You are using SageMaker Model Monitor. What is the 'Baseline'?",
+    "options": [
+      "The statistics and constraints calculated from the training dataset",
+      "The first prediction",
+      "The average performance",
+      "The cost baseline"
+    ],
+    "correctIndex": 0,
+    "explanation": "The Baseline is created by analyzing the training dataset. It serves as the reference point to detect drift in the production data.",
+    "topics": [
+      "SAGEMAKER",
+      "ML_OPS"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q228",
+    "text": "Which technique is used to handle class imbalance by penalizing the model more for errors on the minority class?",
+    "options": [
+      "Class Weights (Cost-sensitive learning)",
+      "SMOTE",
+      "Undersampling",
+      "Oversampling"
+    ],
+    "correctIndex": 0,
+    "explanation": "Assigning higher weights to the minority class in the loss function (Class Weights) forces the model to pay more attention to it.",
+    "topics": [
+      "EVAL"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q229",
+    "text": "You are using Amazon Forecast. What is a 'Predictor'?",
+    "options": [
+      "A trained model",
+      "A dataset",
+      "A forecast",
+      "An algorithm"
+    ],
+    "correctIndex": 0,
+    "explanation": "In Amazon Forecast, a Predictor is the trained model that is capable of generating forecasts.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q230",
+    "text": "You want to use a Lambda function to invoke a SageMaker endpoint. What permission does the Lambda execution role need?",
+    "options": [
+      "sagemaker:InvokeEndpoint",
+      "sagemaker:CreateEndpoint",
+      "s3:GetObject",
+      "iam:PassRole"
+    ],
+    "correctIndex": 0,
+    "explanation": "The Lambda function needs the `sagemaker:InvokeEndpoint` permission on the specific endpoint resource.",
+    "topics": [
+      "SECURITY_COST"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q231",
+    "text": "You are using SageMaker Studio. You want to use a custom image for your kernel. Where should you store the image?",
+    "options": [
+      "Amazon ECR",
+      "Amazon S3",
+      "Docker Hub",
+      "Local disk"
+    ],
+    "correctIndex": 0,
+    "explanation": "Custom images for SageMaker Studio must be stored in Amazon Elastic Container Registry (ECR).",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q232",
+    "text": "Which AWS service is best for extracting text from a passport or driver's license?",
+    "options": [
+      "Amazon Textract (AnalyzeID)",
+      "Amazon Rekognition",
+      "Amazon Comprehend",
+      "Amazon Translate"
+    ],
+    "correctIndex": 0,
+    "explanation": "Amazon Textract has a specialized API `AnalyzeID` for extracting data from identity documents.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q233",
+    "text": "You are using SageMaker Feature Store. What is the 'RecordIdentifierName'?",
+    "options": [
+      "The name of the feature that uniquely identifies a record (primary key)",
+      "The timestamp",
+      "The feature group name",
+      "The S3 bucket"
+    ],
+    "correctIndex": 0,
+    "explanation": "RecordIdentifierName is the name of the feature that acts as the primary key for records in the Feature Group.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q234",
+    "text": "Which algorithm is best for finding the underlying structure or distribution of data (e.g., density estimation)?",
+    "options": [
+      "Gaussian Mixture Models (GMM)",
+      "Linear Regression",
+      "Decision Tree",
+      "KNN"
+    ],
+    "correctIndex": 0,
+    "explanation": "GMM is a probabilistic model that assumes all the data points are generated from a mixture of a finite number of Gaussian distributions with unknown parameters.",
+    "topics": [
+      "EVAL"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q235",
+    "text": "You are using Amazon Fraud Detector. You want to test your detector logic without impacting live traffic. What should you use?",
+    "options": [
+      "Batch Prediction",
+      "Real-time Prediction",
+      "A/B Testing",
+      "Shadow Mode"
+    ],
+    "correctIndex": 0,
+    "explanation": "You can use Batch Prediction to test your detector against a historical dataset to evaluate performance.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q236",
+    "text": "You are using SageMaker Pipelines. You want to register a model only if the evaluation accuracy is > 0.9. Which step helps you do this?",
+    "options": [
+      "ConditionStep",
+      "RegisterModelStep",
+      "ProcessingStep",
+      "FailStep"
+    ],
+    "correctIndex": 0,
+    "explanation": "ConditionStep allows you to evaluate a condition (Accuracy > 0.9) and branch the execution logic.",
+    "topics": [
+      "SAGEMAKER",
+      "ML_OPS"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q237",
+    "text": "Which AWS service is best for building a personalized search experience?",
+    "options": [
+      "Amazon Personalize (Personalized Ranking)",
+      "Amazon Kendra",
+      "Amazon CloudSearch",
+      "Amazon OpenSearch"
+    ],
+    "correctIndex": 0,
+    "explanation": "Amazon Personalize has a 'Personalized Ranking' recipe that can re-rank a list of items for a specific user.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q238",
+    "text": "You are using SageMaker Data Wrangler. You want to export your flow to a SageMaker Pipeline. Is this possible?",
+    "options": [
+      "Yes, you can export to a Pipeline notebook or Python script",
+      "No",
+      "Only to Airflow",
+      "Only to Step Functions"
+    ],
+    "correctIndex": 0,
+    "explanation": "Data Wrangler allows you to export your data flow as a SageMaker Pipeline (via a generated notebook or script).",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q239",
+    "text": "Which metric is best for evaluating a forecasting model?",
+    "options": [
+      "WAPE (Weighted Absolute Percentage Error) or RMSE",
+      "Accuracy",
+      "AUC",
+      "F1 Score"
+    ],
+    "correctIndex": 0,
+    "explanation": "WAPE and RMSE are common metrics for forecasting. WAPE is often preferred as it is scale-independent.",
+    "topics": [
+      "EVAL"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q240",
+    "text": "You are using Amazon Rekognition. You want to detect text in a video. Which API should you use?",
+    "options": [
+      "StartTextDetection",
+      "DetectText",
+      "StartLabelDetection",
+      "GetTextDetection"
+    ],
+    "correctIndex": 0,
+    "explanation": "For video, you start an asynchronous job using `StartTextDetection` and then retrieve results with `GetTextDetection`. (`DetectText` is for images).",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q241",
+    "text": "You are using SageMaker Debugger. You want to debug a training job that is failing with an error. Which feature should you use?",
+    "options": [
+      "SageMaker Debugger Insights",
+      "CloudWatch Logs",
+      "SageMaker Profiler",
+      "SageMaker Experiments"
+    ],
+    "correctIndex": 1,
+    "explanation": "For standard error debugging (stack traces, etc.), CloudWatch Logs is the primary source. Debugger is more for model convergence issues.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q242",
+    "text": "Which AWS service is best for orchestrating a machine learning workflow that involves human review?",
+    "options": [
+      "Amazon Augmented AI (A2I)",
+      "SageMaker Pipelines",
+      "Step Functions",
+      "Lambda"
+    ],
+    "correctIndex": 0,
+    "explanation": "Amazon A2I is designed to easily implement human review of ML predictions.",
+    "topics": [
+      "SAGEMAKER",
+      "ML_OPS"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q243",
+    "text": "You are using SageMaker Model Monitor. You want to monitor the drift of a specific feature. How do you configure this?",
+    "options": [
+      "Edit the constraints.json file to specify the drift threshold for that feature",
+      "You cannot monitor specific features",
+      "Use CloudWatch",
+      "Use Lambda"
+    ],
+    "correctIndex": 0,
+    "explanation": "You can customize the monitoring schedule by modifying the `constraints.json` file to set specific thresholds for features.",
+    "topics": [
+      "SAGEMAKER",
+      "ML_OPS"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q244",
+    "text": "Which algorithm is best for finding frequent itemsets in a transactional database?",
+    "options": [
+      "Apriori",
+      "K-Means",
+      "PCA",
+      "XGBoost"
+    ],
+    "correctIndex": 0,
+    "explanation": "Apriori is a classic algorithm for frequent itemset mining and association rule learning.",
+    "topics": [
+      "EVAL"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q245",
+    "text": "You are using Amazon Personalize. You want to filter recommendations based on a user's age. What do you need to provide?",
+    "options": [
+      "Users dataset with an 'AGE' column",
+      "Items dataset",
+      "Interactions dataset",
+      "You cannot filter by age"
+    ],
+    "correctIndex": 0,
+    "explanation": "To filter by user attributes like age, you must import a Users dataset containing that metadata.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q246",
+    "text": "Which AWS service is best for building a secure data lake with fine-grained access control?",
+    "options": [
+      "AWS Lake Formation",
+      "Amazon S3",
+      "AWS Glue",
+      "Amazon Athena"
+    ],
+    "correctIndex": 0,
+    "explanation": "AWS Lake Formation simplifies setting up a secure data lake and provides fine-grained access control (column-level) for data in S3.",
+    "topics": [
+      "SECURITY_COST"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q247",
+    "text": "You are using SageMaker Training. You want to use a custom metric for hyperparameter tuning that is not emitted by default. What should you do?",
+    "options": [
+      "Define a metric definition (regex) in the estimator to parse the metric from logs",
+      "You cannot use custom metrics",
+      "Write to a specific file",
+      "Use CloudWatch"
+    ],
+    "correctIndex": 0,
+    "explanation": "You can define `metric_definitions` in the SageMaker estimator, providing a regex to capture the metric value from the container's stdout/stderr logs.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q248",
+    "text": "Which AWS service is best for analyzing customer sentiment from social media posts?",
+    "options": [
+      "Amazon Comprehend",
+      "Amazon Translate",
+      "Amazon Polly",
+      "Amazon Textract"
+    ],
+    "correctIndex": 0,
+    "explanation": "Amazon Comprehend provides sentiment analysis APIs.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q249",
+    "text": "You are using SageMaker Pipelines. You want to cache the results of a step to avoid re-running it if the inputs haven't changed. What should you use?",
+    "options": [
+      "Step Caching (CacheConfig)",
+      "S3 Caching",
+      "EFS",
+      "You cannot cache steps"
+    ],
+    "correctIndex": 0,
+    "explanation": "You can enable caching for pipeline steps using `CacheConfig`. If the inputs and parameters are the same, SageMaker reuses the previous result.",
+    "topics": [
+      "SAGEMAKER",
+      "ML_OPS"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q250",
+    "text": "Which algorithm is best for time series forecasting when you have hundreds of related time series?",
+    "options": [
+      "DeepAR",
+      "ARIMA",
+      "ETS",
+      "Prophet"
+    ],
+    "correctIndex": 0,
+    "explanation": "DeepAR is a global model that learns from many time series simultaneously, capturing shared patterns, which is ideal for large datasets of related series.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q251",
+    "text": "You are using Amazon Rekognition. You want to detect if a person is wearing PPE (Personal Protective Equipment). Which API should you use?",
+    "options": [
+      "DetectProtectiveEquipment",
+      "DetectLabels",
+      "DetectFaces",
+      "RecognizeCelebrities"
+    ],
+    "correctIndex": 0,
+    "explanation": "Amazon Rekognition has a specific API `DetectProtectiveEquipment` to detect face covers, hand covers, and head covers.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q252",
+    "text": "You are using SageMaker Feature Store. You want to delete a record from the Online Store. Is this possible?",
+    "options": [
+      "Yes, using the DeleteRecord API",
+      "No, records are immutable",
+      "Only via S3",
+      "Only if it expires"
+    ],
+    "correctIndex": 0,
+    "explanation": "SageMaker Feature Store supports the `DeleteRecord` API to remove a record from the Online Store.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q253",
+    "text": "Which AWS service is best for running a Jupyter notebook for data analysis without managing instances?",
+    "options": [
+      "SageMaker Studio Lab (or SageMaker Studio)",
+      "EC2",
+      "EMR",
+      "Lambda"
+    ],
+    "correctIndex": 0,
+    "explanation": "SageMaker Studio (and the free Studio Lab) provides a managed Jupyter environment where you don't need to provision or manage EC2 instances directly.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q254",
+    "text": "You are using SageMaker Data Wrangler. You want to handle missing values. Which transform should you use?",
+    "options": [
+      "Handle Missing",
+      "Fill Missing",
+      "Impute",
+      "Drop"
+    ],
+    "correctIndex": 0,
+    "explanation": "Data Wrangler has a 'Handle Missing' transform that allows you to drop rows, fill with a value, or impute.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q255",
+    "text": "Which metric is best for evaluating a regression model?",
+    "options": [
+      "RMSE or MAE",
+      "Accuracy",
+      "F1 Score",
+      "AUC"
+    ],
+    "correctIndex": 0,
+    "explanation": "RMSE (Root Mean Squared Error) and MAE (Mean Absolute Error) are standard metrics for regression.",
+    "topics": [
+      "EVAL"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q256",
+    "text": "You are using Amazon Kendra. You want to boost documents that are more recent. What should you use?",
+    "options": [
+      "Relevance tuning (Freshness)",
+      "Thesaurus",
+      "Stop words",
+      "Facets"
+    ],
+    "correctIndex": 0,
+    "explanation": "Kendra allows you to tune relevance, including boosting documents based on their freshness (recency).",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q257",
+    "text": "You are using SageMaker Training. You want to use a warm pool of instances to reduce startup time for iterative training. What feature should you use?",
+    "options": [
+      "SageMaker Managed Warm Pools",
+      "Spot Instances",
+      "Persistent Cache",
+      "EFS"
+    ],
+    "correctIndex": 0,
+    "explanation": "SageMaker Managed Warm Pools keep instances provisioned and ready for a specified time after a job completes, reducing start times for subsequent jobs.",
+    "topics": [
+      "SAGEMAKER",
+      "ML_OPS"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q258",
+    "text": "Which algorithm is best for clustering documents?",
+    "options": [
+      "LDA (Latent Dirichlet Allocation)",
+      "Linear Regression",
+      "Decision Tree",
+      "CNN"
+    ],
+    "correctIndex": 0,
+    "explanation": "LDA is a topic modeling algorithm often used for clustering documents.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q259",
+    "text": "You are using Amazon Transcribe. You want to transcribe audio in a noisy environment. What can help?",
+    "options": [
+      "Use a custom vocabulary or custom language model",
+      "Increase volume",
+      "Use MP3",
+      "Use 8kHz audio"
+    ],
+    "correctIndex": 0,
+    "explanation": "Custom Language Models (CLM) allow you to train Transcribe on domain-specific text to improve accuracy, which can also help in noisy or specific contexts.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q260",
+    "text": "You are using SageMaker Pipelines. You want to get approval from a manager before deploying a model. Which step should you use?",
+    "options": [
+      "There is no manual approval step in Pipelines itself, but you can integrate with Model Registry",
+      "ApprovalStep",
+      "ManualStep",
+      "WaitStep"
+    ],
+    "correctIndex": 0,
+    "explanation": "SageMaker Pipelines doesn't have a 'Manual Approval Step' that pauses execution in the console directly. Instead, you typically register the model to the Model Registry (RegisterModelStep) and use EventBridge to trigger a notification. The pipeline finishes, and deployment is triggered separately upon approval.",
+    "topics": [
+      "SAGEMAKER",
+      "ML_OPS"
+    ],
+    "difficulty": "HARD"
+  },
+  {
+    "id": "q261",
+    "text": "Which AWS service is best for detecting text in natural scenes (e.g., street signs)?",
+    "options": [
+      "Amazon Rekognition (Text in Image)",
+      "Amazon Textract",
+      "Amazon Comprehend",
+      "Amazon Polly"
+    ],
+    "correctIndex": 0,
+    "explanation": "Amazon Rekognition's Text in Image feature is designed for natural scene text detection. (Textract is for documents).",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q262",
+    "text": "You are using SageMaker Autopilot. You want to deploy the best model. How do you find it?",
+    "options": [
+      "DescribeAutoMLJob API returns the `BestCandidate`",
+      "It is automatically deployed",
+      "Check S3",
+      "Guess"
+    ],
+    "correctIndex": 0,
+    "explanation": "The `DescribeAutoMLJob` API response contains a `BestCandidate` field with the details of the best performing model.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q263",
+    "text": "Which technique is used to reduce the number of features by combining them?",
+    "options": [
+      "PCA (Principal Component Analysis)",
+      "Feature Selection",
+      "Dropping",
+      "Imputation"
+    ],
+    "correctIndex": 0,
+    "explanation": "PCA combines existing features into new, uncorrelated variables (principal components), reducing dimensionality.",
+    "topics": [
+      "EVAL"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q264",
+    "text": "You are using Amazon Personalize. You want to recommend items that are often bought together. Which recipe is best?",
+    "options": [
+      "aws-sims (Item-to-Item Similarities)",
+      "aws-user-personalization",
+      "aws-popularity-count",
+      "aws-ranking"
+    ],
+    "correctIndex": 0,
+    "explanation": "SIMS recommends items similar to a given item based on co-occurrence in user history (bought together).",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q265",
+    "text": "You are using SageMaker Training. You want to access data in S3 using a manifest file. What is a manifest file?",
+    "options": [
+      "A JSON file listing the S3 keys of the data files",
+      "A CSV file",
+      "A Python script",
+      "A Docker image"
+    ],
+    "correctIndex": 0,
+    "explanation": "A manifest file is a JSON file that maps the logical names of your data files to their physical locations in S3.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q266",
+    "text": "Which AWS service is best for building a conversational IVR (Interactive Voice Response) system?",
+    "options": [
+      "Amazon Connect + Amazon Lex",
+      "Amazon Pinpoint",
+      "Amazon SNS",
+      "Amazon SES"
+    ],
+    "correctIndex": 0,
+    "explanation": "Amazon Connect is a cloud contact center service. It integrates natively with Amazon Lex to build conversational IVRs.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q267",
+    "text": "You are using SageMaker Model Monitor. You want to monitor for data quality issues like missing values. What should you use?",
+    "options": [
+      "Data Quality Monitor",
+      "Model Quality Monitor",
+      "Bias Monitor",
+      "Explainability Monitor"
+    ],
+    "correctIndex": 0,
+    "explanation": "Data Quality Monitor checks for data integrity issues like missing values, type mismatches, etc.",
+    "topics": [
+      "SAGEMAKER",
+      "ML_OPS"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q268",
+    "text": "Which algorithm is best for classifying images?",
+    "options": [
+      "CNN (Convolutional Neural Network) / Image Classification",
+      "RNN",
+      "XGBoost",
+      "K-Means"
+    ],
+    "correctIndex": 0,
+    "explanation": "CNNs are the standard architecture for image classification.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q269",
+    "text": "You are using Amazon Forecast. You want to visualize the forecast. Where can you do this?",
+    "options": [
+      "Amazon Forecast Console",
+      "QuickSight",
+      "Excel",
+      "All of the above"
+    ],
+    "correctIndex": 3,
+    "explanation": "You can visualize in the console, or export the data to S3 and visualize in QuickSight, Excel, etc.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q270",
+    "text": "You want to ensure that your SageMaker endpoint is highly available. What should you do?",
+    "options": [
+      "Deploy multiple instances (InstanceCount > 1)",
+      "Use a single large instance",
+      "Use Spot instances",
+      "Use Serverless"
+    ],
+    "correctIndex": 0,
+    "explanation": "Deploying with `InstanceCount > 1` ensures that SageMaker distributes the instances across multiple Availability Zones for high availability.",
+    "topics": [
+      "ML_OPS"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q271",
+    "text": "You are using SageMaker Studio. You want to collaborate with other users in real-time. Is this supported?",
+    "options": [
+      "Yes, SageMaker Studio supports shared spaces for collaboration",
+      "No",
+      "Only via Git",
+      "Only via email"
+    ],
+    "correctIndex": 0,
+    "explanation": "SageMaker Studio supports shared spaces where multiple users can access the same file system and collaborate.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q272",
+    "text": "Which AWS service is best for identifying the language of a text document?",
+    "options": [
+      "Amazon Comprehend",
+      "Amazon Translate",
+      "Amazon Polly",
+      "Amazon Lex"
+    ],
+    "correctIndex": 0,
+    "explanation": "Amazon Comprehend has a `DetectDominantLanguage` API.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q273",
+    "text": "You are using SageMaker Pipelines. You want to use a custom container for a step. Which step type should you use?",
+    "options": [
+      "ProcessingStep or TrainingStep",
+      "LambdaStep",
+      "ConditionStep",
+      "RegisterModelStep"
+    ],
+    "correctIndex": 0,
+    "explanation": "Both ProcessingStep and TrainingStep allow you to specify a custom Docker image URI.",
+    "topics": [
+      "SAGEMAKER",
+      "ML_OPS"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q274",
+    "text": "Which metric is best for evaluating a binary classifier when you care about ranking (probability)?",
+    "options": [
+      "AUC-ROC",
+      "Accuracy",
+      "Precision",
+      "Recall"
+    ],
+    "correctIndex": 0,
+    "explanation": "AUC-ROC evaluates how well the model ranks positive examples higher than negative examples across all thresholds.",
+    "topics": [
+      "EVAL"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q275",
+    "text": "You are using Amazon Personalize. You want to recommend items based on a user's location. How can you do this?",
+    "options": [
+      "Use Contextual Recommendations (Context)",
+      "Create separate models for each location",
+      "Filter by location",
+      "You cannot use context"
+    ],
+    "correctIndex": 0,
+    "explanation": "Amazon Personalize supports Contextual Recommendations, where you can pass context (like device type, location, time of day) at inference time.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q276",
+    "text": "Which AWS service is best for building a data catalog that is compatible with Apache Hive?",
+    "options": [
+      "AWS Glue Data Catalog",
+      "Amazon S3",
+      "Amazon DynamoDB",
+      "Amazon Redshift"
+    ],
+    "correctIndex": 0,
+    "explanation": "AWS Glue Data Catalog is a Hive-compatible metastore.",
+    "topics": [
+      "DATA_TRANSFER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q277",
+    "text": "You are using SageMaker Training. You want to stream data from S3 to the training instance. Which input mode should you use?",
+    "options": [
+      "Pipe Mode or Fast File Mode",
+      "File Mode",
+      "Download Mode",
+      "Copy Mode"
+    ],
+    "correctIndex": 0,
+    "explanation": "Pipe Mode streams data via pipes. Fast File Mode exposes S3 as a file system. Both avoid full download.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q278",
+    "text": "Which algorithm is best for predicting a continuous value (e.g., house price)?",
+    "options": [
+      "Linear Learner (Regression) or XGBoost (Regression)",
+      "Logistic Regression",
+      "K-Means",
+      "LDA"
+    ],
+    "correctIndex": 0,
+    "explanation": "Linear Learner and XGBoost can both be used for regression tasks.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q279",
+    "text": "You are using Amazon Transcribe. You want to improve accuracy for domain-specific terms (e.g., medical jargon). What should you use?",
+    "options": [
+      "Custom Vocabulary",
+      "Custom Language Model",
+      "Both A and B",
+      "Neither"
+    ],
+    "correctIndex": 2,
+    "explanation": "You can use Custom Vocabularies for specific words/phrases and Custom Language Models for broader domain adaptation.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q280",
+    "text": "You are using SageMaker Pipelines. You want to fail the pipeline execution if a condition is not met. Which step should you use?",
+    "options": [
+      "FailStep",
+      "StopStep",
+      "ErrorStep",
+      "ExitStep"
+    ],
+    "correctIndex": 0,
+    "explanation": "FailStep is used to explicitly fail the pipeline execution with a custom error message.",
+    "topics": [
+      "SAGEMAKER",
+      "ML_OPS"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q281",
+    "text": "Which AWS service is best for detecting objects in a video stream in real-time?",
+    "options": [
+      "Amazon Kinesis Video Streams + Amazon Rekognition Video",
+      "Amazon S3 + Lambda",
+      "Amazon Transcribe",
+      "Amazon Polly"
+    ],
+    "correctIndex": 0,
+    "explanation": "You can stream video to Kinesis Video Streams and have Rekognition Video consume the stream for analysis.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q282",
+    "text": "You are using SageMaker Autopilot. You want to see the explainability report. Where is it?",
+    "options": [
+      "In SageMaker Studio (Experiments/Model details)",
+      "In S3 (PDF)",
+      "In CloudWatch",
+      "It is not available"
+    ],
+    "correctIndex": 0,
+    "explanation": "Autopilot automatically generates model explainability reports (SHAP values) which can be viewed in SageMaker Studio.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q283",
+    "text": "Which technique is used to scale features to a fixed range (e.g., 0 to 1)?",
+    "options": [
+      "Min-Max Scaling (Normalization)",
+      "Standardization (Z-score)",
+      "Log transformation",
+      "Binning"
+    ],
+    "correctIndex": 0,
+    "explanation": "Min-Max Scaling rescales features to the range [0, 1].",
+    "topics": [
+      "EVAL"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q284",
+    "text": "You are using Amazon Personalize. You want to get recommendations for a user. Which API should you call?",
+    "options": [
+      "GetRecommendations",
+      "GetPersonalizedRanking",
+      "GetSolution",
+      "GetCampaign"
+    ],
+    "correctIndex": 0,
+    "explanation": "GetRecommendations is the primary API to retrieve recommendations from a campaign.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q285",
+    "text": "You are using SageMaker Training. You want to use a private Docker registry. What do you need to provide?",
+    "options": [
+      "Authentication credentials (in Secrets Manager or ECR login)",
+      "You cannot use private registries",
+      "Just the URL",
+      "A VPC Endpoint"
+    ],
+    "correctIndex": 0,
+    "explanation": "SageMaker can pull images from private registries if you provide authentication credentials (usually via VPC interface endpoints or ECR cross-account permissions).",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q286",
+    "text": "Which AWS service is best for building a customer support chatbot?",
+    "options": [
+      "Amazon Lex",
+      "Amazon Polly",
+      "Amazon Transcribe",
+      "Amazon Comprehend"
+    ],
+    "correctIndex": 0,
+    "explanation": "Amazon Lex is the service for building conversational interfaces (chatbots).",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q287",
+    "text": "You are using SageMaker Model Monitor. You want to monitor for concept drift. Which monitor type is this?",
+    "options": [
+      "Model Quality Monitor",
+      "Data Quality Monitor",
+      "Bias Monitor",
+      "Explainability Monitor"
+    ],
+    "correctIndex": 0,
+    "explanation": "Concept drift (change in relationship between features and target) is detected by monitoring Model Quality (accuracy degradation).",
+    "topics": [
+      "SAGEMAKER",
+      "ML_OPS"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q288",
+    "text": "Which algorithm is best for classifying text documents?",
+    "options": [
+      "BlazingText (Supervised) or Linear Learner",
+      "K-Means",
+      "PCA",
+      "Object2Vec"
+    ],
+    "correctIndex": 0,
+    "explanation": "BlazingText (Supervised mode) is highly optimized for text classification.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q289",
+    "text": "You are using Amazon Forecast. You want to include holiday information. What should you do?",
+    "options": [
+      "Enable the 'Holidays' feature in the Supplementary Features",
+      "Manually create a holiday dataset",
+      "Forecast handles holidays automatically without setting",
+      "You cannot include holidays"
+    ],
+    "correctIndex": 0,
+    "explanation": "Amazon Forecast allows you to easily include national holiday calendars for various countries as a supplementary feature.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q290",
+    "text": "You want to ensure that your SageMaker notebook instance is encrypted. What should you use?",
+    "options": [
+      "KMS Key (Volume Encryption)",
+      "SSL",
+      "VPC",
+      "IAM"
+    ],
+    "correctIndex": 0,
+    "explanation": "You can specify a KMS key to encrypt the EBS volume attached to the Notebook Instance.",
+    "topics": [
+      "SECURITY_COST"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q291",
+    "text": "You are using SageMaker Studio. You want to run a job on a schedule. What can you use?",
+    "options": [
+      "SageMaker Pipelines (with EventBridge schedule)",
+      "Cron in the notebook",
+      "You cannot schedule jobs",
+      "Use Windows Task Scheduler"
+    ],
+    "correctIndex": 0,
+    "explanation": "The standard way to schedule ML workflows in SageMaker is to define a Pipeline and trigger it via Amazon EventBridge rules.",
+    "topics": [
+      "SAGEMAKER",
+      "ML_OPS"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q292",
+    "text": "Which AWS service is best for detecting unsafe content in user profile photos?",
+    "options": [
+      "Amazon Rekognition (Content Moderation)",
+      "Amazon Textract",
+      "Amazon Comprehend",
+      "Amazon Macie"
+    ],
+    "correctIndex": 0,
+    "explanation": "Rekognition Content Moderation detects explicit or suggestive content.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q293",
+    "text": "You are using SageMaker Feature Store. You want to retrieve a batch of features for training. Which API should you use?",
+    "options": [
+      "You use Athena or Glue to query the Offline Store (S3)",
+      "GetRecord",
+      "BatchGetRecord",
+      "ListFeatures"
+    ],
+    "correctIndex": 0,
+    "explanation": "The Offline Store is backed by S3. To retrieve a large batch for training, you typically use Athena or Glue to query the S3 data.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q294",
+    "text": "Which algorithm is best for finding anomalies in time series data?",
+    "options": [
+      "Random Cut Forest (RCF)",
+      "Linear Regression",
+      "K-Means",
+      "PCA"
+    ],
+    "correctIndex": 0,
+    "explanation": "RCF is a standard algorithm for anomaly detection, including in time series (by shingling).",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q295",
+    "text": "You are using Amazon Fraud Detector. You want to use your own model. Is this possible?",
+    "options": [
+      "Yes, you can import SageMaker models",
+      "No, you must use Fraud Detector models",
+      "Only TensorFlow models",
+      "Only XGBoost models"
+    ],
+    "correctIndex": 0,
+    "explanation": "Amazon Fraud Detector allows you to import your own models trained in SageMaker.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "MEDIUM"
+  },
+  {
+    "id": "q296",
+    "text": "You are using SageMaker Pipelines. You want to run a step in parallel. How do you do this?",
+    "options": [
+      "Simply define multiple steps that depend on the same previous step (or no step)",
+      "Use ParallelStep",
+      "Use MapStep",
+      "You cannot run steps in parallel"
+    ],
+    "correctIndex": 0,
+    "explanation": "SageMaker Pipelines executes steps in parallel automatically if there are no dependencies between them.",
+    "topics": [
+      "SAGEMAKER",
+      "ML_OPS"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q297",
+    "text": "Which AWS service is best for building a personalized movie recommendation system?",
+    "options": [
+      "Amazon Personalize",
+      "Amazon Forecast",
+      "Amazon Kendra",
+      "Amazon Comprehend"
+    ],
+    "correctIndex": 0,
+    "explanation": "Amazon Personalize is purpose-built for recommendation systems.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q298",
+    "text": "You are using SageMaker Data Wrangler. You want to use a custom SQL query to select data. Is this supported?",
+    "options": [
+      "Yes, Data Wrangler supports SQL queries for data selection (Athena/Redshift/Snowflake)",
+      "No",
+      "Only for S3",
+      "Only for CSV"
+    ],
+    "correctIndex": 0,
+    "explanation": "Data Wrangler allows you to write custom SQL queries to import data from supported sources like Athena, Redshift, and Snowflake.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q299",
+    "text": "Which metric is best for evaluating a classifier when you want to balance Precision and Recall?",
+    "options": [
+      "F1 Score",
+      "Accuracy",
+      "MSE",
+      "Log Loss"
+    ],
+    "correctIndex": 0,
+    "explanation": "F1 Score is the harmonic mean of Precision and Recall.",
+    "topics": [
+      "EVAL"
+    ],
+    "difficulty": "EASY"
+  },
+  {
+    "id": "q300",
+    "text": "You are using Amazon Rekognition. You want to detect if a person is happy or sad. Which API should you use?",
+    "options": [
+      "DetectFaces (returns Emotions)",
+      "DetectEmotions",
+      "AnalyzeSentiment",
+      "DetectLabels"
+    ],
+    "correctIndex": 0,
+    "explanation": "The `DetectFaces` API returns facial attributes, including a list of emotions (Happy, Sad, Angry, etc.) with confidence scores.",
+    "topics": [
+      "SAGEMAKER"
+    ],
+    "difficulty": "EASY"
+  }
+]
