@@ -10,7 +10,7 @@ import { cn } from '../utils/cn';
 
 const ExamTake: React.FC = () => {
     const navigate = useNavigate();
-    const { currentSession, getQuestion, answerQuestion, finishExam } = useExamSessionStore();
+    const { currentSession, getQuestion, answerQuestion, toggleMultiSelectAnswer, finishExam, getAnswer } = useExamSessionStore();
     const addSession = useHistoryStore((state) => state.addSession);
 
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -25,10 +25,16 @@ const ExamTake: React.FC = () => {
 
     const currentQuestionId = currentSession.questionIds[currentIndex];
     const question = getQuestion(currentQuestionId);
-    const currentAnswer = currentSession.answers.find(a => a.questionId === currentQuestionId);
+    const currentAnswer = getAnswer(currentQuestionId);
 
     const handleAnswer = (selectedIndex: number) => {
-        answerQuestion(currentQuestionId, selectedIndex);
+        if (!question) return;
+
+        if (question.isMultiSelect) {
+            toggleMultiSelectAnswer(currentQuestionId, selectedIndex);
+        } else {
+            answerQuestion(currentQuestionId, selectedIndex);
+        }
     };
 
     const handleNext = () => {
@@ -46,15 +52,10 @@ const ExamTake: React.FC = () => {
     const handleSubmit = () => {
         if (window.confirm('Are you sure you want to submit your exam?')) {
             finishExam();
-            // We need to get the updated session from the store, but finishExam updates it.
-            // However, the state update might be async in React's view, but Zustand is synchronous.
-            // Let's grab the latest state directly.
             const finishedSession = useExamSessionStore.getState().currentSession;
             if (finishedSession) {
                 addSession(finishedSession);
                 navigate(`/exam/result/${finishedSession.id}`);
-                // Reset session is not called here, so we can view results. 
-                // It should be reset when starting a new exam.
             }
         }
     };
@@ -72,16 +73,19 @@ const ExamTake: React.FC = () => {
     if (!question) return <div>Loading question...</div>;
 
     return (
-        <div className="flex flex-col md:flex-row gap-6 h-[calc(100vh-100px)]">
-            {/* Main Content */}
-            <div className="flex-1 flex flex-col gap-6 overflow-y-auto pr-2">
-                {/* Header */}
-                <div className="flex items-center justify-between bg-surface p-4 rounded-xl border border-slate-700/50">
-                    <div>
-                        <span className="text-sm text-muted uppercase tracking-wider font-bold">Question</span>
-                        <div className="text-2xl font-bold text-white">
-                            {currentIndex + 1} <span className="text-muted text-lg">/ {currentSession.totalQuestions}</span>
+        <div className="flex flex-col lg:flex-row gap-4 h-[calc(100vh-80px)]">
+            {/* Main Content - Full width optimized */}
+            <div className="flex-1 flex flex-col gap-3 max-w-6xl mx-auto w-full overflow-hidden">
+                {/* Compact Header */}
+                <div className="flex items-center justify-between bg-surface px-4 py-2 rounded-lg border border-slate-700/50 flex-shrink-0">
+                    <div className="flex items-center gap-4">
+                        <div>
+                            <span className="text-xs text-muted uppercase tracking-wider font-bold">Question</span>
+                            <div className="text-xl font-bold text-white">
+                                {currentIndex + 1} <span className="text-muted text-sm">/ {currentSession.totalQuestions}</span>
+                            </div>
                         </div>
+                        <ProgressBar current={currentIndex + 1} total={currentSession.totalQuestions} />
                     </div>
                     <Timer
                         durationSeconds={currentSession.durationSeconds}
@@ -89,19 +93,18 @@ const ExamTake: React.FC = () => {
                     />
                 </div>
 
-                <ProgressBar current={currentIndex + 1} total={currentSession.totalQuestions} />
-
-                {/* Question Card */}
-                <div className="flex-1">
+                {/* Question Card - Scrollable */}
+                <div className="flex-1 overflow-y-auto min-h-0">
                     <QuestionCard
                         question={question}
                         selectedIndex={currentAnswer?.selectedIndex ?? null}
+                        selectedIndices={currentAnswer?.selectedIndices ?? []}
                         onSelect={handleAnswer}
                     />
                 </div>
 
-                {/* Navigation */}
-                <div className="flex items-center justify-between py-4">
+                {/* Navigation - Always visible */}
+                <div className="flex items-center justify-between py-4 sticky bottom-0 bg-background/95 backdrop-blur-sm -mx-4 px-4 border-t border-slate-800">
                     <button
                         onClick={handlePrev}
                         disabled={currentIndex === 0}
@@ -132,7 +135,7 @@ const ExamTake: React.FC = () => {
             </div>
 
             {/* Sidebar Navigation (Desktop) */}
-            <div className="hidden md:flex flex-col w-72 bg-surface rounded-xl border border-slate-700/50 p-4 h-full overflow-hidden">
+            <div className="hidden lg:flex flex-col w-64 bg-surface rounded-xl border border-slate-700/50 p-4 h-fit sticky top-4 max-h-[calc(100vh-120px)] overflow-hidden">
                 <h3 className="font-bold text-white mb-4">Question Navigator</h3>
                 <div className="grid grid-cols-5 gap-2 overflow-y-auto content-start flex-1 pr-2">
                     {currentSession.questionIds.map((qid, idx) => {

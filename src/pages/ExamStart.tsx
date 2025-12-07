@@ -19,7 +19,7 @@ const ExamStart: React.FC = () => {
         navigate('/exam/take');
     };
 
-    const questionOptions = examMode === 'past_exam' ? [10, 20, 40, 73] : [10, 20, 40, 65];
+    const questionOptions = examMode === 'past_exam' ? [10, 20, 40, 85] : [10, 20, 40, 65];
     const timeOptions = [15, 30, 60, 180];
 
     return (
@@ -58,7 +58,7 @@ const ExamStart: React.FC = () => {
                         >
                             <BookOpen size={28} />
                             <span className="font-bold">Past Exam Mode</span>
-                            <span className="text-xs opacity-75">73 real exam questions</span>
+                            <span className="text-xs opacity-75">85 real exam questions</span>
                         </button>
                     </div>
                 </div>

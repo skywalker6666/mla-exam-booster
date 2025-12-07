@@ -1,6 +1,6 @@
 import React from 'react';
-import { Question } from '../types';
 import { cn } from '../utils/cn';
+import { Check } from 'lucide-react';
 
 interface OptionButtonProps {
     text: string;
@@ -10,16 +10,19 @@ interface OptionButtonProps {
     disabled?: boolean;
     showResult?: boolean;
     isCorrect?: boolean;
+    isMultiSelect?: boolean;
+    selectionOrder?: number; // 1-based order for ordering questions
 }
 
 const OptionButton: React.FC<OptionButtonProps> = ({
     text,
-    index,
     isSelected,
     onClick,
     disabled,
     showResult,
     isCorrect,
+    isMultiSelect = false,
+    selectionOrder,
 }) => {
     let variantClass = "border-slate-700 hover:bg-slate-700/50 hover:border-slate-600";
 
@@ -35,6 +38,8 @@ const OptionButton: React.FC<OptionButtonProps> = ({
         variantClass = "border-primary bg-primary/10 text-primary ring-1 ring-primary";
     }
 
+    const showOrderNumber = isMultiSelect && selectionOrder !== undefined && selectionOrder > 0;
+
     return (
         <button
             onClick={onClick}
@@ -45,12 +50,27 @@ const OptionButton: React.FC<OptionButtonProps> = ({
                 disabled && !showResult && "opacity-50 cursor-not-allowed"
             )}
         >
-            <div className={cn(
-                "w-6 h-6 rounded-full border-2 flex items-center justify-center flex-shrink-0 mt-0.5 transition-colors",
-                isSelected || (showResult && isCorrect) ? "border-current" : "border-slate-600 group-hover:border-slate-500"
-            )}>
-                {(isSelected || (showResult && isCorrect)) && <div className="w-2.5 h-2.5 rounded-full bg-current" />}
-            </div>
+            {isMultiSelect ? (
+                // For multi-select/ordering: show order number or checkbox
+                <div className={cn(
+                    "w-7 h-7 rounded-md border-2 flex items-center justify-center flex-shrink-0 mt-0.5 transition-colors font-bold text-sm",
+                    isSelected || (showResult && isCorrect) ? "border-current bg-current/20" : "border-slate-600 group-hover:border-slate-500"
+                )}>
+                    {showOrderNumber ? (
+                        <span>{selectionOrder}</span>
+                    ) : (isSelected || (showResult && isCorrect)) ? (
+                        <Check size={14} className="text-current" />
+                    ) : null}
+                </div>
+            ) : (
+                // Radio style for single-select
+                <div className={cn(
+                    "w-6 h-6 rounded-full border-2 flex items-center justify-center flex-shrink-0 mt-0.5 transition-colors",
+                    isSelected || (showResult && isCorrect) ? "border-current" : "border-slate-600 group-hover:border-slate-500"
+                )}>
+                    {(isSelected || (showResult && isCorrect)) && <div className="w-2.5 h-2.5 rounded-full bg-current" />}
+                </div>
+            )}
             <span className="leading-relaxed">{text}</span>
         </button>
     );

@@ -1,10 +1,11 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { CheckCircle, XCircle, Clock, ArrowLeft, BarChart2, Download, FileText } from 'lucide-react';
+import { CheckCircle, XCircle, Clock, ArrowLeft, BarChart2, FileText } from 'lucide-react';
 import { useHistoryStore } from '../store/historyStore';
 import { useExamSessionStore } from '../store/examSessionStore';
 import QuestionCard from '../components/QuestionCard';
 import { cn } from '../utils/cn';
+import { generateWrongNotesHTML } from '../utils/wrongNotesGenerator';
 import questionsData from '../data/questions.json';
 import pastExamQuestionsData from '../data/past_exam_questions.json';
 import { Question } from '../types';
@@ -35,81 +36,10 @@ const ExamResult: React.FC = () => {
     }
 
     const percentage = Math.round((session.totalScore / session.totalQuestions) * 100);
-    const isPass = percentage >= 72; // AWS passing score is usually around 720/1000
+    const isPass = percentage >= 72;
 
     // Get wrong answers
     const wrongAnswers = session.answers.filter(a => !a.isCorrect);
-
-    // Generate Notion markdown for wrong answers
-    const generateNotionMarkdown = () => {
-        const date = new Date().toLocaleDateString('zh-TW');
-        let markdown = `# AWS MLA-C01 錯題筆記\n\n`;
-        markdown += `📅 日期：${date}\n`;
-        markdown += `📊 成績：${session.totalScore}/${session.totalQuestions} (${percentage}%)\n`;
-        markdown += `⏱️ 用時：${Math.floor(session.timeSpentSeconds / 60)}分${session.timeSpentSeconds % 60}秒\n\n`;
-        markdown += `---\n\n`;
-
-        wrongAnswers.forEach((answer, idx) => {
-            const question = allQuestionsMap.get(answer.questionId);
-            if (!question) return;
-
-            markdown += `## ❌ 錯題 ${idx + 1}\n\n`;
-            markdown += `### 題目\n${question.text}\n\n`;
-            markdown += `### 選項\n`;
-
-            question.options.forEach((opt, i) => {
-                const letter = String.fromCharCode(65 + i);
-                const isCorrect = i === question.correctIndex;
-                const wasSelected = i === answer.selectedIndex;
-
-                let prefix = '';
-                if (isCorrect && wasSelected) {
-                    prefix = '✅ ';
-                } else if (isCorrect) {
-                    prefix = '✅ ';
-                } else if (wasSelected) {
-                    prefix = '❌ ';
-                }
-
-                markdown += `${prefix}**${letter}.** ${opt}\n`;
-            });
-
-            markdown += `\n### 解析\n`;
-            markdown += `- **正確答案：** ${String.fromCharCode(65 + question.correctIndex)}\n`;
-            markdown += `- **您的選擇：** ${answer.selectedIndex !== null ? String.fromCharCode(65 + answer.selectedIndex) : '未作答'}\n`;
-
-            if (question.explanation) {
-                markdown += `- **詳細說明：** ${question.explanation}\n`;
-            }
-
-            // Add topic tags
-            if (question.topics && question.topics.length > 0) {
-                markdown += `\n**相關主題：** ${question.topics.map(t => `\`${t}\``).join(' ')}\n`;
-            }
-
-            markdown += `\n---\n\n`;
-        });
-
-        markdown += `## 📚 複習建議\n\n`;
-
-        // Calculate topic weakness
-        const topicErrors: Record<string, number> = {};
-        wrongAnswers.forEach(answer => {
-            const question = allQuestionsMap.get(answer.questionId);
-            if (question) {
-                question.topics.forEach(topic => {
-                    topicErrors[topic] = (topicErrors[topic] || 0) + 1;
-                });
-            }
-        });
-
-        const sortedTopics = Object.entries(topicErrors).sort((a, b) => b[1] - a[1]);
-        sortedTopics.forEach(([topic, count]) => {
-            markdown += `- [ ] **${topic}**：錯誤 ${count} 題，建議加強複習\n`;
-        });
-
-        return markdown;
-    };
 
     const handleExportNotion = () => {
         if (wrongAnswers.length === 0) {
@@ -117,16 +47,20 @@ const ExamResult: React.FC = () => {
             return;
         }
 
-        const markdown = generateNotionMarkdown();
-        const blob = new Blob([markdown], { type: 'text/markdown;charset=utf-8' });
+        // Generate HTML and open in new tab
+        const html = generateWrongNotesHTML({
+            date: new Date().toLocaleDateString('zh-TW'),
+            score: session.totalScore,
+            totalQuestions: session.totalQuestions,
+            percentage,
+            timeSpentSeconds: session.timeSpentSeconds,
+            wrongAnswers,
+            getQuestion: (id) => allQuestionsMap.get(id)
+        });
+
+        const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
         const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `錯題筆記_${new Date().toISOString().split('T')[0]}.md`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
+        window.open(url, '_blank');
     };
 
     // Calculate topic stats
@@ -283,6 +217,7 @@ const ExamResult: React.FC = () => {
                                 <QuestionCard
                                     question={question}
                                     selectedIndex={answer.selectedIndex}
+                                    selectedIndices={answer.selectedIndices ?? []}
                                     onSelect={() => { }}
                                     showResult={true}
                                 />

@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { ExamSession, Question } from '../types';
+import { ExamSession, Question, UserAnswer } from '../types';
 import questionsData from '../data/questions.json';
 import pastExamQuestionsData from '../data/past_exam_questions.json';
 import { shuffle } from '../utils/shuffle';
@@ -14,9 +14,11 @@ interface ExamSessionState {
     currentSession: ExamSession | null;
     startExam: (questionCount: number, durationMinutes: number, isPastExam?: boolean) => void;
     answerQuestion: (questionId: string, selectedIndex: number) => void;
+    toggleMultiSelectAnswer: (questionId: string, selectedIndex: number) => void;
     finishExam: () => void;
     resetSession: () => void;
     getQuestion: (id: string) => Question | undefined;
+    getAnswer: (questionId: string) => UserAnswer | undefined;
 }
 
 export const useExamSessionStore = create<ExamSessionState>()(
@@ -33,16 +35,12 @@ export const useExamSessionStore = create<ExamSessionState>()(
                 // Smart Selection Logic
                 let usedQuestionIds = new Set<string>();
                 try {
-                    // Attempt to read history from local storage to prioritize new questions
-                    // Note: This is a direct read to avoid circular dependency with historyStore
                     const historyStorage = localStorage.getItem('exam-history-storage');
                     if (historyStorage) {
                         const parsed = JSON.parse(historyStorage);
-                        // Check if sessions exist in the parsed state
                         const sessions = parsed.state?.sessions || [];
 
                         sessions.forEach((s: any) => {
-                            // Handle both data structures (local vs api)
                             if (s.questionIds && Array.isArray(s.questionIds)) {
                                 s.questionIds.forEach((id: string) => usedQuestionIds.add(id));
                             } else if (s.answers && Array.isArray(s.answers)) {
@@ -65,17 +63,12 @@ export const useExamSessionStore = create<ExamSessionState>()(
                 // Select questions: prioritize unseen
                 let selectedQuestions = [...shuffledUnseen];
 
-                // If we need more, take from seen
                 if (selectedQuestions.length < questionCount) {
                     const remainingCount = questionCount - selectedQuestions.length;
                     selectedQuestions = [...selectedQuestions, ...shuffledSeen.slice(0, remainingCount)];
                 } else {
-                    // If we have more unseen than needed, just take the first N
                     selectedQuestions = selectedQuestions.slice(0, questionCount);
                 }
-
-                // If we still don't have enough (e.g. total questions < requested), just take what we have
-                // (Though UI shouldn't allow this ideally)
 
                 const questionIds = selectedQuestions.map((q) => q.id);
 
@@ -121,6 +114,83 @@ export const useExamSessionStore = create<ExamSessionState>()(
                 });
             },
 
+            toggleMultiSelectAnswer: (questionId, selectedIndex) => {
+                const { currentSession } = get();
+                if (!currentSession) return;
+
+                const question = allQuestionsMap.get(questionId);
+                if (!question) return;
+
+                const existingAnswerIndex = currentSession.answers.findIndex(a => a.questionId === questionId);
+                let newAnswers = [...currentSession.answers];
+
+                // Check if this is a HOTSPOT without known correct answers
+                const hasNoCorrectAnswer = question.hasNoCorrectAnswer ||
+                    (question.isMultiSelect && !question.correctIndices);
+
+                if (existingAnswerIndex >= 0) {
+                    // Update existing answer
+                    const existing = newAnswers[existingAnswerIndex];
+                    let selectedIndices = existing.selectedIndices ? [...existing.selectedIndices] : [];
+
+                    if (selectedIndices.includes(selectedIndex)) {
+                        // Remove if already selected
+                        selectedIndices = selectedIndices.filter(i => i !== selectedIndex);
+                    } else {
+                        // Add if not selected (respect selectCount limit)
+                        const maxSelect = question.selectCount || 2;
+                        if (selectedIndices.length < maxSelect) {
+                            selectedIndices.push(selectedIndex);
+                        } else {
+                            // Replace oldest selection
+                            selectedIndices.shift();
+                            selectedIndices.push(selectedIndex);
+                        }
+                    }
+
+                    // Check correctness for multi-select
+                    // For HOTSPOT without correct answers, treat as practice (always correct)
+                    let isCorrect = true;
+                    if (!hasNoCorrectAnswer) {
+                        const correctIndices = question.correctIndices || [question.correctIndex];
+                        isCorrect = selectedIndices.length === correctIndices.length &&
+                            selectedIndices.every(i => correctIndices.includes(i));
+                    }
+
+                    newAnswers[existingAnswerIndex] = {
+                        questionId,
+                        selectedIndex: selectedIndices[0] ?? null,
+                        selectedIndices,
+                        isCorrect
+                    };
+                } else {
+                    // Create new answer
+                    const selectedIndices = [selectedIndex];
+
+                    // For HOTSPOT without correct answers, treat as practice (always correct)
+                    let isCorrect = true;
+                    if (!hasNoCorrectAnswer) {
+                        const correctIndices = question.correctIndices || [question.correctIndex];
+                        isCorrect = selectedIndices.length === correctIndices.length &&
+                            selectedIndices.every(i => correctIndices.includes(i));
+                    }
+
+                    newAnswers.push({
+                        questionId,
+                        selectedIndex,
+                        selectedIndices,
+                        isCorrect
+                    });
+                }
+
+                set({
+                    currentSession: {
+                        ...currentSession,
+                        answers: newAnswers,
+                    },
+                });
+            },
+
             finishExam: () => {
                 const { currentSession } = get();
                 if (!currentSession) return;
@@ -144,6 +214,12 @@ export const useExamSessionStore = create<ExamSessionState>()(
             resetSession: () => set({ currentSession: null }),
 
             getQuestion: (id) => allQuestionsMap.get(id),
+
+            getAnswer: (questionId) => {
+                const { currentSession } = get();
+                if (!currentSession) return undefined;
+                return currentSession.answers.find(a => a.questionId === questionId);
+            },
         }),
         {
             name: 'exam-session-storage',

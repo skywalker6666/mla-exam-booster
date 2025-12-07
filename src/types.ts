@@ -20,11 +20,16 @@ export type Question = {
     difficulty?: Difficulty;
     isPastExam?: boolean;
     optionExplanations?: string[];
+    isMultiSelect?: boolean;
+    selectCount?: number;
+    correctIndices?: number[];
+    hasNoCorrectAnswer?: boolean; // For HOTSPOT questions without known answers
 };
 
 export type UserAnswer = {
     questionId: string;
     selectedIndex: number | null;
+    selectedIndices?: number[];
     isCorrect: boolean;
 };
 
