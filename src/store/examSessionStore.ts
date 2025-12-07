@@ -2,11 +2,17 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { ExamSession, Question } from '../types';
 import questionsData from '../data/questions.json';
+import pastExamQuestionsData from '../data/past_exam_questions.json';
 import { shuffle } from '../utils/shuffle';
+
+// Combine all questions for lookup
+const allQuestionsMap = new Map<string, Question>();
+(questionsData as Question[]).forEach(q => allQuestionsMap.set(q.id, q));
+(pastExamQuestionsData as Question[]).forEach(q => allQuestionsMap.set(q.id, q));
 
 interface ExamSessionState {
     currentSession: ExamSession | null;
-    startExam: (questionCount: number, durationMinutes: number) => void;
+    startExam: (questionCount: number, durationMinutes: number, isPastExam?: boolean) => void;
     answerQuestion: (questionId: string, selectedIndex: number) => void;
     finishExam: () => void;
     resetSession: () => void;
@@ -18,8 +24,11 @@ export const useExamSessionStore = create<ExamSessionState>()(
         (set, get) => ({
             currentSession: null,
 
-            startExam: (questionCount, durationMinutes) => {
-                const allQuestions = questionsData as Question[];
+            startExam: (questionCount, durationMinutes, isPastExam = false) => {
+                // Select the appropriate question pool
+                const allQuestions = isPastExam
+                    ? (pastExamQuestionsData as Question[])
+                    : (questionsData as Question[]);
 
                 // Smart Selection Logic
                 let usedQuestionIds = new Set<string>();
@@ -80,6 +89,7 @@ export const useExamSessionStore = create<ExamSessionState>()(
                     totalQuestions: selectedQuestions.length,
                     durationSeconds: durationMinutes * 60,
                     timeSpentSeconds: 0,
+                    isPastExam,
                 };
 
                 set({ currentSession: newSession });
@@ -89,7 +99,7 @@ export const useExamSessionStore = create<ExamSessionState>()(
                 const { currentSession } = get();
                 if (!currentSession) return;
 
-                const question = (questionsData as Question[]).find((q) => q.id === questionId);
+                const question = allQuestionsMap.get(questionId);
                 if (!question) return;
 
                 const isCorrect = question.correctIndex === selectedIndex;
@@ -133,7 +143,7 @@ export const useExamSessionStore = create<ExamSessionState>()(
 
             resetSession: () => set({ currentSession: null }),
 
-            getQuestion: (id) => (questionsData as Question[]).find((q) => q.id === id),
+            getQuestion: (id) => allQuestionsMap.get(id),
         }),
         {
             name: 'exam-session-storage',

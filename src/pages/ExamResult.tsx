@@ -1,12 +1,18 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { CheckCircle, XCircle, Clock, Award, ArrowLeft, BarChart2 } from 'lucide-react';
+import { CheckCircle, XCircle, Clock, ArrowLeft, BarChart2, Download, FileText } from 'lucide-react';
 import { useHistoryStore } from '../store/historyStore';
 import { useExamSessionStore } from '../store/examSessionStore';
 import QuestionCard from '../components/QuestionCard';
 import { cn } from '../utils/cn';
 import questionsData from '../data/questions.json';
+import pastExamQuestionsData from '../data/past_exam_questions.json';
 import { Question } from '../types';
+
+// Combine all questions for lookup
+const allQuestionsMap = new Map<string, Question>();
+(questionsData as Question[]).forEach(q => allQuestionsMap.set(q.id, q));
+(pastExamQuestionsData as Question[]).forEach(q => allQuestionsMap.set(q.id, q));
 
 const ExamResult: React.FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -31,9 +37,101 @@ const ExamResult: React.FC = () => {
     const percentage = Math.round((session.totalScore / session.totalQuestions) * 100);
     const isPass = percentage >= 72; // AWS passing score is usually around 720/1000
 
+    // Get wrong answers
+    const wrongAnswers = session.answers.filter(a => !a.isCorrect);
+
+    // Generate Notion markdown for wrong answers
+    const generateNotionMarkdown = () => {
+        const date = new Date().toLocaleDateString('zh-TW');
+        let markdown = `# AWS MLA-C01 錯題筆記\n\n`;
+        markdown += `📅 日期：${date}\n`;
+        markdown += `📊 成績：${session.totalScore}/${session.totalQuestions} (${percentage}%)\n`;
+        markdown += `⏱️ 用時：${Math.floor(session.timeSpentSeconds / 60)}分${session.timeSpentSeconds % 60}秒\n\n`;
+        markdown += `---\n\n`;
+
+        wrongAnswers.forEach((answer, idx) => {
+            const question = allQuestionsMap.get(answer.questionId);
+            if (!question) return;
+
+            markdown += `## ❌ 錯題 ${idx + 1}\n\n`;
+            markdown += `### 題目\n${question.text}\n\n`;
+            markdown += `### 選項\n`;
+
+            question.options.forEach((opt, i) => {
+                const letter = String.fromCharCode(65 + i);
+                const isCorrect = i === question.correctIndex;
+                const wasSelected = i === answer.selectedIndex;
+
+                let prefix = '';
+                if (isCorrect && wasSelected) {
+                    prefix = '✅ ';
+                } else if (isCorrect) {
+                    prefix = '✅ ';
+                } else if (wasSelected) {
+                    prefix = '❌ ';
+                }
+
+                markdown += `${prefix}**${letter}.** ${opt}\n`;
+            });
+
+            markdown += `\n### 解析\n`;
+            markdown += `- **正確答案：** ${String.fromCharCode(65 + question.correctIndex)}\n`;
+            markdown += `- **您的選擇：** ${answer.selectedIndex !== null ? String.fromCharCode(65 + answer.selectedIndex) : '未作答'}\n`;
+
+            if (question.explanation) {
+                markdown += `- **詳細說明：** ${question.explanation}\n`;
+            }
+
+            // Add topic tags
+            if (question.topics && question.topics.length > 0) {
+                markdown += `\n**相關主題：** ${question.topics.map(t => `\`${t}\``).join(' ')}\n`;
+            }
+
+            markdown += `\n---\n\n`;
+        });
+
+        markdown += `## 📚 複習建議\n\n`;
+
+        // Calculate topic weakness
+        const topicErrors: Record<string, number> = {};
+        wrongAnswers.forEach(answer => {
+            const question = allQuestionsMap.get(answer.questionId);
+            if (question) {
+                question.topics.forEach(topic => {
+                    topicErrors[topic] = (topicErrors[topic] || 0) + 1;
+                });
+            }
+        });
+
+        const sortedTopics = Object.entries(topicErrors).sort((a, b) => b[1] - a[1]);
+        sortedTopics.forEach(([topic, count]) => {
+            markdown += `- [ ] **${topic}**：錯誤 ${count} 題，建議加強複習\n`;
+        });
+
+        return markdown;
+    };
+
+    const handleExportNotion = () => {
+        if (wrongAnswers.length === 0) {
+            alert('恭喜！沒有錯題需要導出。');
+            return;
+        }
+
+        const markdown = generateNotionMarkdown();
+        const blob = new Blob([markdown], { type: 'text/markdown;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `錯題筆記_${new Date().toISOString().split('T')[0]}.md`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    };
+
     // Calculate topic stats
     const topicStats = session.answers.reduce((acc, answer) => {
-        const question = (questionsData as Question[]).find(q => q.id === answer.questionId);
+        const question = allQuestionsMap.get(answer.questionId);
         if (!question) return acc;
 
         question.topics.forEach(topic => {
@@ -65,7 +163,7 @@ const ExamResult: React.FC = () => {
                                 ? 'You have demonstrated a solid understanding of the exam topics.'
                                 : 'Review your weak areas and try again. You can do this!'}
                         </p>
-                        <div className="flex gap-4">
+                        <div className="flex flex-wrap gap-3">
                             <button onClick={() => navigate('/')} className="btn btn-secondary">
                                 <ArrowLeft size={18} />
                                 Dashboard
@@ -73,6 +171,15 @@ const ExamResult: React.FC = () => {
                             <button onClick={() => navigate('/exam/start')} className="btn btn-primary">
                                 Try Again
                             </button>
+                            {wrongAnswers.length > 0 && (
+                                <button
+                                    onClick={handleExportNotion}
+                                    className="btn bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500 text-white"
+                                >
+                                    <FileText size={18} />
+                                    Export Wrong Notes
+                                </button>
+                            )}
                         </div>
                     </div>
 
@@ -109,6 +216,17 @@ const ExamResult: React.FC = () => {
                             {percentage}%
                         </div>
                     </div>
+                    {wrongAnswers.length > 0 && (
+                        <div>
+                            <div className="flex items-center gap-2 text-muted mb-1">
+                                <XCircle size={16} />
+                                <span className="text-sm font-medium">Wrong Answers</span>
+                            </div>
+                            <div className="text-2xl font-bold text-red-400">
+                                {wrongAnswers.length}
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
 
@@ -150,7 +268,7 @@ const ExamResult: React.FC = () => {
                 <h2 className="text-xl font-bold text-white mb-4">Detailed Review</h2>
                 <div className="space-y-6">
                     {session.answers.map((answer, idx) => {
-                        const question = (questionsData as Question[]).find(q => q.id === answer.questionId);
+                        const question = allQuestionsMap.get(answer.questionId);
                         if (!question) return null;
 
                         return (

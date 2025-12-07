@@ -5,7 +5,8 @@ export type QuestionTopic =
     | 'XGBOOST'
     | 'SAGEMAKER'
     | 'ML_OPS'
-    | 'SECURITY_COST';
+    | 'SECURITY_COST'
+    | 'PAST_EXAM';
 
 export type Difficulty = 'EASY' | 'MEDIUM' | 'HARD';
 
@@ -17,6 +18,8 @@ export type Question = {
     explanation?: string;
     topics: QuestionTopic[];
     difficulty?: Difficulty;
+    isPastExam?: boolean;
+    optionExplanations?: string[];
 };
 
 export type UserAnswer = {
@@ -35,6 +38,7 @@ export type ExamSession = {
     totalQuestions: number;
     durationSeconds: number; // Duration of the exam in seconds
     timeSpentSeconds: number; // Actual time spent
+    isPastExam?: boolean;
 };
 
 export type ExamHistoryItem = {
