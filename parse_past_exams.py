@@ -2,7 +2,7 @@ import re
 import json
 
 def parse_past_exam_1(file_path: str) -> list:
-    """Parse the past exam file - handles both MCQ and HOTSPOT questions"""
+    """Parse the past exam file - handles MCQ, HOTSPOT, and multi-select questions"""
     with open(file_path, 'r', encoding='utf-8') as f:
         content = f.read()
     
@@ -27,89 +27,136 @@ def parse_past_exam_1(file_path: str) -> list:
         # Check if HOTSPOT
         is_hotspot = q_content.startswith('HOTSPOT')
         
+        # Check if multi-select
+        is_multi_select = '(Choose two.)' in q_content or '(Choose three.)' in q_content
+        
         if is_hotspot:
             # Parse HOTSPOT question differently
-            # Extract question text
-            text_lines = []
-            for line in q_content.split('\n'):
-                line = line.strip()
-                if line and line != 'HOTSPOT -' and not line.startswith('•') and not line.startswith('Correct Answer'):
-                    text_lines.append(line)
-                if line.startswith('•'):
-                    break
-            
-            question_text = ' '.join(text_lines).replace('  ', ' ')
+            # Extract question text (before first bullet point)
+            text_match = re.search(r'^HOTSPOT -\s*(.+?)(?=\n•)', q_content, re.DOTALL)
+            if text_match:
+                question_text = text_match.group(1).strip().replace('\n', ' ').replace('  ', ' ')
+            else:
+                # Fallback
+                lines = []
+                for line in q_content.split('\n'):
+                    line = line.strip()
+                    if line and line != 'HOTSPOT -' and not line.startswith('•') and not line.startswith('Correct Answer'):
+                        lines.append(line)
+                    if line.startswith('•'):
+                        break
+                question_text = ' '.join(lines).replace('  ', ' ')
             
             # Extract bullet options
-            bullet_options = re.findall(r'•\s*(.+?)(?=\n•|\nCorrect Answer|$)', q_content, re.DOTALL)
+            bullet_options = re.findall(r'•\s*(.+?)(?=\n•|\nCorrect Answer|--- Page|$)', q_content, re.DOTALL)
             options = [opt.strip().replace('\n', ' ').replace('  ', ' ') for opt in bullet_options]
+            
+            # Determine how many to select
+            select_count = 3  # Default for HOTSPOT
+            if '(Select and order three.)' in question_text or '(Select three.)' in question_text:
+                select_count = 3
             
             if len(options) >= 2:
                 questions.append({
                     'id': f'past_q{q_num}',
                     'text': question_text,
-                    'options': options[:4],  # Limit to 4 options
-                    'correctIndex': 0,  # HOTSPOT - no single correct answer
-                    'explanation': 'This is a HOTSPOT/ordering question. Review the options carefully.',
+                    'options': options[:5],  # Limit to 5 options
+                    'correctIndex': 0,  # HOTSPOT - multiple correct answers
+                    'explanation': f'This is a HOTSPOT question. Select and order {select_count} correct steps.',
                     'topics': ['PAST_EXAM'],
                     'difficulty': 'MEDIUM',
                     'isPastExam': True,
-                    'isHotspot': True
+                    'isMultiSelect': True,
+                    'selectCount': select_count
                 })
         else:
-            # Parse MCQ question
-            # Extract question text (before first option A.)
-            text_match = re.search(r'^(.+?)(?=\n[A-E]\.\s)', q_content, re.DOTALL)
-            if not text_match:
-                continue
-            question_text = text_match.group(1).strip().replace('\n', ' ').replace('  ', ' ')
+            # Parse MCQ/Multi-select question
+            lines = q_content.split('\n')
             
-            # Extract options
+            question_lines = []
             options = []
-            option_pattern = r'^([A-E])\.\s+(.+?)(?=\n[A-E]\.\s|\nCorrect Answer:|\nCommunity vote|$)'
-            option_matches = re.findall(option_pattern, q_content, re.DOTALL | re.MULTILINE)
+            current_option = None
+            correct_answer = None
             
-            for letter, text in option_matches:
-                clean_text = text.strip().replace('\n', ' ').replace('  ', ' ')
-                options.append(clean_text)
+            for line in lines:
+                stripped = line.strip()
+                if not stripped:
+                    continue
+                
+                # Check for correct answer
+                answer_match = re.match(r'Correct Answer:\s*([A-E]+)', stripped)
+                if answer_match:
+                    correct_answer = answer_match.group(1)
+                    if current_option is not None:
+                        options.append(current_option)
+                    break
+                
+                # Check for community vote (end of options)
+                if stripped.startswith('Community vote'):
+                    if current_option is not None:
+                        options.append(current_option)
+                    break
+                
+                # Check for option start (A., B., C., D., E.)
+                option_match = re.match(r'^([A-E])\.\s+(.+)$', stripped)
+                if option_match:
+                    if current_option is not None:
+                        options.append(current_option)
+                    current_option = option_match.group(2)
+                elif current_option is not None:
+                    current_option += ' ' + stripped
+                else:
+                    question_lines.append(stripped)
             
-            # Extract correct answer
-            answer_match = re.search(r'Correct Answer:\s*([A-E]+)', q_content)
-            if answer_match:
-                correct_answer = answer_match.group(1)
+            # Clean up
+            question_text = ' '.join(question_lines).replace('  ', ' ')
+            
+            # Determine correct indices
+            if correct_answer:
                 if len(correct_answer) == 1:
                     correct_index = ord(correct_answer) - ord('A')
+                    correct_indices = [correct_index]
                 else:
-                    # Multi-answer - just use first
-                    correct_index = ord(correct_answer[0]) - ord('A')
+                    # Multi-answer (e.g., "AB", "AD")
+                    correct_indices = [ord(c) - ord('A') for c in correct_answer]
+                    correct_index = correct_indices[0]  # Keep first for backward compatibility
             else:
                 correct_index = 0
+                correct_indices = [0]
                 correct_answer = 'A'
             
-            # Basic explanation
-            explanation = f"Correct Answer: {correct_answer}"
+            # Clean options
+            clean_options = []
+            for opt in options:
+                clean_opt = opt.replace('  ', ' ').strip()
+                clean_options.append(clean_opt)
             
-            if len(options) >= 2 and len(options) <= 6:
-                questions.append({
+            if len(clean_options) >= 2 and len(clean_options) <= 6:
+                q_data = {
                     'id': f'past_q{q_num}',
                     'text': question_text,
-                    'options': options,
+                    'options': clean_options,
                     'correctIndex': correct_index,
-                    'explanation': explanation,
+                    'explanation': f"Correct Answer: {correct_answer}",
                     'topics': ['PAST_EXAM'],
                     'difficulty': 'MEDIUM',
                     'isPastExam': True
-                })
+                }
+                
+                # Mark multi-select questions
+                if is_multi_select or len(correct_answer) > 1:
+                    q_data['isMultiSelect'] = True
+                    q_data['correctIndices'] = correct_indices
+                    q_data['selectCount'] = len(correct_indices)
+                
+                questions.append(q_data)
     
     return questions
 
 def check_duplicates(past_questions: list, existing_questions: list) -> tuple:
-    """Check for duplicate questions and return (unique_past, duplicates)"""
-    
-    # Create a simple fingerprint for each existing question
+    """Check for duplicate questions"""
     existing_fingerprints = set()
     for q in existing_questions:
-        # Use first 80 chars of question text as fingerprint
         fingerprint = q['text'][:80].lower().strip()
         existing_fingerprints.add(fingerprint)
     
@@ -131,11 +178,18 @@ def main():
     
     print(f"Parsed {len(questions)} questions from past_exam_1.txt")
     
-    # Show question breakdown
-    mcq_count = len([q for q in questions if not q.get('isHotspot')])
-    hotspot_count = len([q for q in questions if q.get('isHotspot')])
-    print(f"  - MCQ questions: {mcq_count}")
-    print(f"  - HOTSPOT questions: {hotspot_count}")
+    # Count question types
+    mcq_count = len([q for q in questions if not q.get('isMultiSelect')])
+    multi_count = len([q for q in questions if q.get('isMultiSelect')])
+    print(f"  - Single-choice (MCQ): {mcq_count}")
+    print(f"  - Multi-select/HOTSPOT: {multi_count}")
+    
+    # List multi-select questions
+    print("\nMulti-select questions:")
+    for q in questions:
+        if q.get('isMultiSelect'):
+            select_count = q.get('selectCount', 2)
+            print(f"  - {q['id']}: Select {select_count} (options: {len(q['options'])})")
     
     # Load existing questions
     with open('src/data/questions.json', 'r', encoding='utf-8') as f:
@@ -148,12 +202,7 @@ def main():
     
     print(f"\nDuplicate analysis:")
     print(f"  - Unique past exam questions: {len(unique_questions)}")
-    print(f"  - Duplicates found (will be removed): {len(duplicates)}")
-    
-    if duplicates:
-        print("\nDuplicate questions found:")
-        for d in duplicates[:5]:  # Show first 5
-            print(f"  - {d['id']}: {d['text'][:60]}...")
+    print(f"  - Duplicates found: {len(duplicates)}")
     
     # Sort by question number
     unique_questions.sort(key=lambda x: int(x['id'].replace('past_q', '')))
@@ -162,7 +211,7 @@ def main():
     with open('src/data/past_exam_questions.json', 'w', encoding='utf-8') as f:
         json.dump(unique_questions, f, ensure_ascii=False, indent=2)
     
-    print(f"\nSaved {len(unique_questions)} unique past exam questions to src/data/past_exam_questions.json")
+    print(f"\nSaved {len(unique_questions)} questions to src/data/past_exam_questions.json")
 
 if __name__ == "__main__":
     main()
