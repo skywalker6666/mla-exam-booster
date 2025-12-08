@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ChevronLeft, ChevronRight, CheckCircle, XCircle, RefreshCw } from 'lucide-react';
+import { ChevronLeft, ChevronRight, CheckCircle, RefreshCw } from 'lucide-react';
 import { useHistoryStore } from '../store/historyStore';
 import QuestionCard from '../components/QuestionCard';
-import { cn } from '../utils/cn';
 import questionsData from '../data/questions.json';
 import { Question } from '../types';
 
