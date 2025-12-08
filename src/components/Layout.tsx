@@ -1,7 +1,9 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { LayoutDashboard, History, BarChart2, BookOpen } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { LayoutDashboard, History, BarChart2, BookOpen, LogIn, LogOut, User } from 'lucide-react';
 import { cn } from '../utils/cn';
+import { useAuth } from '../hooks/useAuth';
+import { signOut } from '../lib/supabase';
 
 interface LayoutProps {
     children: React.ReactNode;
@@ -9,6 +11,8 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
     const location = useLocation();
+    const navigate = useNavigate();
+    const { user, loading } = useAuth();
 
     const navItems = [
         { path: '/', label: 'Dashboard', icon: LayoutDashboard },
@@ -16,6 +20,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         { path: '/stats', label: 'Stats', icon: BarChart2 },
         { path: '/practice/wrong', label: 'Review', icon: BookOpen },
     ];
+
+    const handleSignOut = async () => {
+        await signOut();
+        navigate('/');
+    };
 
     return (
         <div className="min-h-screen bg-background text-text flex">
@@ -48,10 +57,40 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                         );
                     })}
                 </nav>
+
+                {/* User Section */}
+                <div className="p-4 border-t border-slate-700/50">
+                    {loading ? (
+                        <div className="text-muted text-sm">Loading...</div>
+                    ) : user ? (
+                        <div className="space-y-3">
+                            <div className="flex items-center gap-2 text-sm">
+                                <User size={16} className="text-primary" />
+                                <span className="text-slate-300 truncate">{user.email}</span>
+                            </div>
+                            <button
+                                onClick={handleSignOut}
+                                className="flex items-center gap-2 text-sm text-muted hover:text-red-400 transition-colors w-full"
+                            >
+                                <LogOut size={16} />
+                                <span>Sign Out</span>
+                            </button>
+                        </div>
+                    ) : (
+                        <Link
+                            to="/login"
+                            className="flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors"
+                        >
+                            <LogIn size={16} />
+                            <span>Sign In to Sync</span>
+                        </Link>
+                    )}
+                </div>
+
                 <div className="p-4 border-t border-slate-700/50">
                     <div className="bg-slate-900/50 rounded-lg p-3 text-xs text-muted">
-                        <p>v1.0.0 MVP</p>
-                        <p>Ready for Exam</p>
+                        <p>v1.1.0</p>
+                        <p>{user ? '☁️ Cloud Sync' : '💾 Local Only'}</p>
                     </div>
                 </div>
             </aside>
@@ -67,3 +106,4 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 };
 
 export default Layout;
+

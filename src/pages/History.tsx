@@ -1,28 +1,114 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Calendar, Clock, ChevronRight } from 'lucide-react';
+import { Calendar, Clock, ChevronRight, Cloud, Loader2 } from 'lucide-react';
 import { useHistoryStore } from '../store/historyStore';
+import { useAuth } from '../hooks/useAuth';
+import { supabase } from '../lib/supabase';
 import { cn } from '../utils/cn';
 
 const History: React.FC = () => {
     const navigate = useNavigate();
-    const { sessions, clearHistory } = useHistoryStore();
+    const { sessions, clearHistory, fetchHistory } = useHistoryStore();
+    const { user } = useAuth();
+    const [migrating, setMigrating] = useState(false);
+    const [migrationResult, setMigrationResult] = useState<string | null>(null);
+
+    // Migrate local history to cloud
+    const handleMigrateToCloud = async () => {
+        if (!user) return;
+
+        setMigrating(true);
+        setMigrationResult(null);
+
+        try {
+            // Fetch local history from SQLite
+            const response = await fetch('/api/history');
+            if (!response.ok) throw new Error('Failed to fetch local history');
+            const json = await response.json();
+            const localSessions = json.data || [];
+
+            if (localSessions.length === 0) {
+                setMigrationResult('No local history to migrate.');
+                setMigrating(false);
+                return;
+            }
+
+            // Upload each session to Supabase
+            let successCount = 0;
+            for (const session of localSessions) {
+                const { error } = await supabase
+                    .from('exam_sessions')
+                    .upsert({
+                        id: session.id,
+                        user_id: user.id,
+                        exam_type: session.isPastExam ? 'past_exam' : 'practice',
+                        score: session.totalScore,
+                        total: session.totalQuestions,
+                        time_spent: session.timeSpentSeconds,
+                        questions: session.questionIds || [],
+                        answers: session.answers || [],
+                        completed_at: session.finishedAt || session.startedAt,
+                    }, { onConflict: 'id' });
+
+                if (!error) successCount++;
+            }
+
+            setMigrationResult(`✅ Migrated ${successCount}/${localSessions.length} sessions to cloud!`);
+
+            // Refresh history from cloud
+            await fetchHistory();
+        } catch (error) {
+            console.error(error);
+            setMigrationResult('❌ Migration failed. Please try again.');
+        } finally {
+            setMigrating(false);
+        }
+    };
 
     return (
         <div className="max-w-4xl mx-auto">
             <div className="flex items-center justify-between mb-8">
                 <h1 className="text-3xl font-bold text-white">Exam History</h1>
-                {sessions.length > 0 && (
-                    <button
-                        onClick={() => {
-                            if (confirm('Clear all history?')) clearHistory();
-                        }}
-                        className="text-sm text-red-400 hover:text-red-300"
-                    >
-                        Clear History
-                    </button>
-                )}
+                <div className="flex items-center gap-4">
+                    {user && (
+                        <button
+                            onClick={handleMigrateToCloud}
+                            disabled={migrating}
+                            className="flex items-center gap-2 text-sm text-primary hover:text-primary/80 disabled:opacity-50"
+                        >
+                            {migrating ? (
+                                <Loader2 size={16} className="animate-spin" />
+                            ) : (
+                                <Cloud size={16} />
+                            )}
+                            {migrating ? 'Migrating...' : 'Sync Local to Cloud'}
+                        </button>
+                    )}
+                    {sessions.length > 0 && (
+                        <button
+                            onClick={() => {
+                                if (confirm('Clear all history?')) clearHistory();
+                            }}
+                            className="text-sm text-red-400 hover:text-red-300"
+                        >
+                            Clear History
+                        </button>
+                    )}
+                </div>
             </div>
+
+            {migrationResult && (
+                <div className={cn(
+                    "mb-4 p-3 rounded-lg text-sm",
+                    migrationResult.startsWith('✅')
+                        ? "bg-green-500/10 text-green-400 border border-green-500/20"
+                        : migrationResult.startsWith('❌')
+                            ? "bg-red-500/10 text-red-400 border border-red-500/20"
+                            : "bg-slate-700/50 text-slate-300"
+                )}>
+                    {migrationResult}
+                </div>
+            )}
 
             {sessions.length === 0 ? (
                 <div className="text-center py-20 card border-dashed border-slate-700">
@@ -53,7 +139,9 @@ const History: React.FC = () => {
                                 </div>
 
                                 <div className="flex-1 text-center md:text-left">
-                                    <h3 className="text-lg font-bold text-white mb-1">Practice Exam</h3>
+                                    <h3 className="text-lg font-bold text-white mb-1">
+                                        {session.isPastExam ? 'Past Exam' : 'Practice Exam'}
+                                    </h3>
                                     <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 text-sm text-muted">
                                         <div className="flex items-center gap-1">
                                             <Calendar size={14} />
@@ -61,7 +149,7 @@ const History: React.FC = () => {
                                         </div>
                                         <div className="flex items-center gap-1">
                                             <Clock size={14} />
-                                            {Math.floor(session.timeSpentSeconds / 60)}m {session.timeSpentSeconds % 60}s
+                                            {Math.floor((session.timeSpentSeconds || 0) / 60)}m {(session.timeSpentSeconds || 0) % 60}s
                                         </div>
                                         <div>
                                             {session.totalScore} / {session.totalQuestions} Correct
@@ -80,3 +168,4 @@ const History: React.FC = () => {
 };
 
 export default History;
+
