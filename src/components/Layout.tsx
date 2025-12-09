@@ -122,8 +122,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             {/* Main Content */}
             <main className="flex-1 overflow-auto pb-20 md:pb-0">
                 <div className={cn(
-                    "mx-auto p-4 md:p-10",
-                    location.pathname === '/exam/take' ? "max-w-full" : "max-w-5xl"
+                    "mx-auto",
+                    location.pathname === '/exam/take' ? "max-w-full" : "max-w-5xl p-4 md:p-10"
                 )}>
                     {children}
                 </div>

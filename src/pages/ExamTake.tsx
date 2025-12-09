@@ -87,8 +87,8 @@ const ExamTake: React.FC = () => {
 
     return (
         <div className="flex flex-col min-h-[calc(100vh-80px)] relative">
-            {/* Header Bar */}
-            <div className="sticky top-0 z-20 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-slate-700/50 -mx-4 px-4 py-3 mb-6 flex items-center justify-between gap-4">
+            {/* Header Bar - Full Width */}
+            <div className="sticky top-0 z-20 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-slate-700/50 px-4 md:px-6 py-3 flex items-center justify-between gap-4">
                 <div className="flex items-center gap-4 flex-1">
                     <div className="flex flex-col">
                         <div className="flex items-baseline gap-2">
@@ -119,56 +119,61 @@ const ExamTake: React.FC = () => {
                 </div>
             </div>
 
-            <div className="flex flex-1 gap-6 relative">
+            <div className="flex flex-1 relative">
                 {/* Main Content Area */}
                 <div className={cn(
-                    "flex-1 flex flex-col gap-6 transition-all duration-300 ease-in-out w-full",
+                    "flex-1 flex flex-col transition-all duration-300 ease-in-out w-full",
                     isNavOpen ? "lg:mr-80" : ""
                 )}>
-                    {/* Question Card */}
-                    <div className="flex-1">
-                        <QuestionCard
-                            question={question}
-                            selectedIndex={currentAnswer?.selectedIndex ?? null}
-                            selectedIndices={currentAnswer?.selectedIndices ?? []}
-                            onSelect={handleAnswer}
-                        />
-                    </div>
+                    {/* Content Container - Centered with max-width */}
+                    <div className="w-full max-w-[1600px] mx-auto p-4 md:p-8 flex flex-col gap-6 flex-1">
 
-                    {/* Bottom Navigation */}
-                    <div className="flex items-center justify-between py-6 mt-auto border-t border-slate-700/50">
-                        <button
-                            onClick={handlePrev}
-                            disabled={currentIndex === 0}
-                            className="btn btn-secondary disabled:opacity-50 px-6"
-                        >
-                            <ChevronLeft size={20} />
-                            Previous
-                        </button>
+                        {/* Question Card */}
+                        <div className="flex-1">
+                            <QuestionCard
+                                question={question}
+                                selectedIndex={currentAnswer?.selectedIndex ?? null}
+                                selectedIndices={currentAnswer?.selectedIndices ?? []}
+                                onSelect={handleAnswer}
+                            />
+                        </div>
 
-                        {currentIndex === currentSession.totalQuestions - 1 ? (
+                        {/* Bottom Navigation Buttons */}
+                        <div className="flex items-center justify-between mt-auto">
                             <button
-                                onClick={handleSubmit}
-                                className="btn btn-primary bg-green-600 hover:bg-green-700 shadow-lg shadow-green-500/20 px-8"
+                                onClick={handlePrev}
+                                disabled={currentIndex === 0}
+                                className="btn btn-secondary disabled:opacity-50 px-6"
                             >
-                                Submit Exam
-                                <Flag size={20} />
+                                <ChevronLeft size={20} />
+                                Previous
                             </button>
-                        ) : (
-                            <button
-                                onClick={handleNext}
-                                className="btn btn-primary px-8"
-                            >
-                                Next
-                                <ChevronRight size={20} />
-                            </button>
-                        )}
+
+                            {currentIndex === currentSession.totalQuestions - 1 ? (
+                                <button
+                                    onClick={handleSubmit}
+                                    className="btn btn-primary bg-green-600 hover:bg-green-700 shadow-lg shadow-green-500/20 px-8"
+                                >
+                                    Submit Exam
+                                    <Flag size={20} />
+                                </button>
+                            ) : (
+                                <button
+                                    onClick={handleNext}
+                                    className="btn btn-primary px-8"
+                                >
+                                    Next
+                                    <ChevronRight size={20} />
+                                </button>
+                            )}
+                        </div>
                     </div>
                 </div>
 
-                {/* Question Navigator Sidebar */}
+                {/* Question Navigator Sidebar - Fixed Right */}
                 <div className={cn(
-                    "fixed top-[88px] right-0 bottom-0 w-80 bg-surface border-l border-slate-700/50 p-4 transform transition-transform duration-300 ease-in-out z-10 flex flex-col shadow-2xl overflow-hidden",
+                    "fixed top-[73px] right-0 bottom-0 w-80 bg-surface border-l border-slate-700/50 p-4 transform transition-transform duration-300 ease-in-out z-10 flex flex-col shadow-2xl overflow-hidden",
+                    // Note: top value adjusts based on header height (~73px)
                     isNavOpen ? "translate-x-0" : "translate-x-full"
                 )}>
                     <div className="flex items-center justify-between mb-4 pb-4 border-b border-slate-700/50">
